@@ -27,7 +27,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
     const s = slides[i]!;
     if (s.doc === null) { setI(1); setSeq((v) => v + 1); return; }
     const d = documents[s.doc]!;
-    open({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] });
+    open({ title: d.title, embed: d.url, previewImage: d.preview, links: [{ label: "Download", url: d.url, kind: "download" }] });
   };
 
   return (

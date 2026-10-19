@@ -177,7 +177,7 @@ function Index() {
                 <p className="mt-4 text-lg font-bold">{d.title}</p>
                 <p className="text-sm opacity-90">{d.sub}</p>
                 <div className="mt-4 flex gap-2">
-                  {d.ext === "PDF" && <button onClick={() => setModal({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] })} className="min-h-11 rounded-full bg-ink px-4 text-sm font-bold text-ink-foreground">Preview</button>}
+                  {d.ext === "PDF" && <button onClick={() => setModal({ title: d.title, embed: d.url, previewImage: d.preview, links: [{ label: "Download", url: d.url, kind: "download" }] })} className="min-h-11 rounded-full bg-ink px-4 text-sm font-bold text-ink-foreground">Preview</button>}
                   <a href={d.url} download target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 min-h-11 rounded-full bg-ink/15 px-4 text-sm font-bold"><Icon name="download" width={16} height={16} />Download</a>
                 </div>
               </div>

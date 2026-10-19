@@ -54,6 +54,7 @@ export function SectionTitle({ kicker, title, children }: { kicker: string; titl
 
 export type ModalItem = {
   title: string; body?: string | undefined; embed?: string | undefined;
+  previewImage?: string | undefined;
   links?: { label: string; url: string; kind: "link" | "github" | "pdf" | "download" }[] | undefined;
 };
 
@@ -66,6 +67,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
     return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [item, onClose]);
   if (!item) return null;
+  const isPdfEmbed = typeof item.embed === "string" && item.embed.toLowerCase().endsWith(".pdf");
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-0 md:items-center md:p-6 animate-in fade-in" onClick={onClose} role="dialog" aria-modal="true" aria-label={item.title}>
       <div className="flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-3xl bg-card md:rounded-3xl animate-in slide-in-from-bottom-4" onClick={(e) => e.stopPropagation()}>
@@ -77,7 +79,20 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
           {item.body && <p className="text-base leading-relaxed text-muted-foreground">{item.body}</p>}
           {item.embed && (
             <div className="mt-4 overflow-hidden rounded-2xl bg-muted">
-              <iframe src={item.embed} title={item.title} className="h-[60vh] w-full" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" />
+              {isPdfEmbed ? (
+                <div className="space-y-3 p-3">
+                  {item.previewImage && (
+                    <img src={item.previewImage} alt={`${item.title} preview`} className="max-h-[40vh] w-full rounded-xl object-contain bg-card" loading="eager" />
+                  )}
+                  <object data={item.embed} type="application/pdf" className="h-[60vh] w-full rounded-xl bg-card">
+                    <div className="flex h-[60vh] items-center justify-center p-6 text-center text-sm text-muted-foreground">
+                      PDF preview is unavailable in this browser. Use the button below to open or download the file.
+                    </div>
+                  </object>
+                </div>
+              ) : (
+                <iframe src={item.embed} title={item.title} className="h-[60vh] w-full" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" />
+              )}
             </div>
           )}
           {item.links && item.links.length > 0 && (
@@ -90,7 +105,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
               ))}
             </div>
           )}
-          {item.embed && <p className="mt-3 text-xs text-muted-foreground">If the preview stays empty, the site blocks embedding - use the button above to open it.</p>}
+          {item.embed && <p className="mt-3 text-xs text-muted-foreground">If the preview stays empty, use the button above to open or download the file.</p>}
         </div>
       </div>
     </div>

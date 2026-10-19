@@ -8,6 +8,8 @@ const cvDataIT = file("Soumyakanta_Bera_CV_AnalistaDati-BusinessAnalyst_IT_v5.pd
 const cvGenEN = file("Bera_Soumyakanta_CV_EN.pdf");
 const cvGenIT = file("Bera_Soumyakanta_CV_IT.pdf");
 const cvGenDocx = file("Bera_Soumyakanta_CV_EN.docx");
+const cvGenENPreview = file("cv-preview.png");
+const cvGenITPreview = file("cv-it-preview.png");
 const navaro = file("Scheda_progetto_Navaro_Casa_IT.pdf");
 
 export type Status = "done" | "progress" | "planned";
@@ -152,14 +154,13 @@ export const certificates: { name: string; issuer: string; status: Status; color
   { name: "SAP S/4HANA Management Accounting (SAP CO)", issuer: "SAP", brands: ["sap"], status: "progress", color: "blue" },
 ];
 
-export const documents: { title: string; sub: string; url: string; icon: IconName; color: Color; ext: string }[] = [
+export const documents: { title: string; sub: string; url: string; icon: IconName; color: Color; ext: string; preview?: string }[] = [
   { title: "Finance CV", sub: "English · FP&A / Credit", url: cvFinEN.url, icon: "cv", color: "blue", ext: "PDF" },
   { title: "CV Finanza", sub: "Italiano · FP&A / Credito", url: cvFinIT.url, icon: "cv", color: "blue", ext: "PDF" },
   { title: "Data / BA CV", sub: "English", url: cvDataEN.url, icon: "cv", color: "orange", ext: "PDF" },
   { title: "CV Dati / BA", sub: "Italiano", url: cvDataIT.url, icon: "cv", color: "orange", ext: "PDF" },
-  { title: "General CV", sub: "English · agencies", url: cvGenEN.url, icon: "cv", color: "green", ext: "PDF" },
-  { title: "CV generale", sub: "Italiano · agenzie", url: cvGenIT.url, icon: "cv", color: "green", ext: "PDF" },
+  { title: "General CV", sub: "English · agencies", url: cvGenEN.url, icon: "cv", color: "green", ext: "PDF", preview: cvGenENPreview.url },
+  { title: "CV generale", sub: "Italiano · agenzie", url: cvGenIT.url, icon: "cv", color: "green", ext: "PDF", preview: cvGenITPreview.url },
   { title: "General CV (Word)", sub: "English · no photo", url: cvGenDocx.url, icon: "download", color: "yellow", ext: "DOCX" },
   { title: "Navaro Casa sheet", sub: "Project one-pager (IT)", url: navaro.url, icon: "pdf", color: "yellow", ext: "PDF" },
 ];
-
