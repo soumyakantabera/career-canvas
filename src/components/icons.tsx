@@ -33,6 +33,7 @@ export const Icons = {
   pin: (p: P) => (<Base {...p}><path d="M12 22s7-6 7-12a7 7 0 00-14 0c0 6 7 12 7 12z" /><circle cx="12" cy="10" r="2.5" {...F} /></Base>),
   plus: (p: P) => (<Base {...p}><path d="M12 5v14M5 12h14" /></Base>),
   close: (p: P) => (<Base {...p}><path d="M6 6l12 12M18 6L6 18" /></Base>),
+  user: (p: P) => (<Base {...p}><circle cx="12" cy="8" r="4" {...F} /><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6" /></Base>),
   eye: (p: P) => (<Base {...p}><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z" /><circle cx="12" cy="12" r="3" {...F} /></Base>),
   check: (p: P) => (<Base {...p}><path d="M5 12l5 5 9-10" /></Base>),
 };

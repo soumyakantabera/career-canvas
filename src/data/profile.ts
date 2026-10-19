@@ -34,7 +34,7 @@ export const stats = [
 export type Skill = { name: string; status: Status };
 export type Track = {
   id: TrackId; title: string; roles: string; focus: number; color: Color; icon: IconName;
-  pitch: string; skills: Skill[]; gaps: string[]; cv: { label: string; url: string }[];
+  pitch: string; skills: Skill[]; cv: { label: string; url: string }[];
 };
 
 export const tracks: Track[] = [
@@ -50,7 +50,6 @@ export const tracks: Track[] = [
       { name: "SAP S/4HANA Management Accounting (SAP CO)", status: "progress" },
       { name: "Live valuation model (P2)", status: "planned" },
     ],
-    gaps: ["SAP in practice", "ERP / Oracle"],
     cv: [{ label: "CV EN", url: cvFinEN.url }, { label: "CV IT", url: cvFinIT.url }],
   },
   {
@@ -64,7 +63,6 @@ export const tracks: Track[] = [
       { name: "SQL check layer (P2)", status: "planned" },
       { name: "Navaro Casa KPI pipeline (P1)", status: "progress" },
     ],
-    gaps: ["Qlik", "SAS / R", "Big data"],
     cv: [{ label: "CV EN", url: cvDataEN.url }, { label: "CV IT", url: cvDataIT.url }],
   },
   {
@@ -77,7 +75,6 @@ export const tracks: Track[] = [
       { name: "Stakeholder reporting", status: "done" },
       { name: "Jira board", status: "planned" },
     ],
-    gaps: ["Workshops in Italian"],
     cv: [{ label: "CV EN", url: cvDataEN.url }, { label: "CV IT", url: cvDataIT.url }],
   },
 ];
@@ -165,20 +162,3 @@ export const documents: { title: string; sub: string; url: string; icon: IconNam
   { title: "Navaro Casa sheet", sub: "Project one-pager (IT)", url: navaro.url, icon: "pdf", color: "yellow", ext: "PDF" },
 ];
 
-export const defaultActions = [
-  "Check university Microsoft 365 + SAP Learning Hub expiry",
-  "LinkedIn Sitting A",
-  "Update Indeed profile (20 min)",
-  "Set job alerts from keyword list",
-  "2-3 applications a day (Affinity Petcare, KPMG, DXC first)",
-  "Email agencies (Randstad, Adecco, Hays, Michael Page)",
-  "Visit patronato",
-  "P0 published by 31 Oct",
-];
-
-export const privateNotes = [
-  { label: "Permit", value: "Study permit until Mar 2027 - convertible outside quotas with a contract" },
-  { label: "Salary answer", value: "EUR 26-30k gross" },
-  { label: "Weekly budget", value: "About 10 h for search + projects" },
-  { label: "Don't claim", value: "SAP in practice, ERP, Oracle, Qlik, SAS, R, Zucchetti, big data" },
-];

@@ -3,11 +3,11 @@ import { BrandLogo, brandName, brandUrl } from "./brand-logos";
 import { profile, projects } from "@/data/profile";
 import { Icon } from "./icons";
 import { SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "./ui-blocks";
-import { months, planProjects, scenarios, totals, weeklyRhythm } from "@/data/plan";
+import { months, planProjects, totals, weeklyRhythm } from "@/data/plan";
 
 const maxH = Math.max(...months.map((m) => m.projectHours));
 
-export function Roadmap({ mine, open }: { mine: boolean; open: (item: ModalItem) => void }) {
+export function Roadmap({ open }: { open: (item: ModalItem) => void }) {
   const [active, setActive] = useState(months[0]!.id);
   const m = months.find((x) => x.id === active)!;
   let cum = 0;
@@ -162,10 +162,9 @@ export function Roadmap({ mine, open }: { mine: boolean; open: (item: ModalItem)
           </div>
           <div className="flex items-center gap-3"><StatusChip status={m.status} /><span className="rounded-full bg-ink px-3 py-1 text-sm font-bold text-ink-foreground">{m.projectHours} h · {m.applications} apps</span></div>
         </div>
-        <div className={`grid gap-4 p-6 ${mine ? "md:grid-cols-3" : "md:grid-cols-2"} ${soft[m.color]}`}>
+        <div className={`grid gap-4 p-6 md:grid-cols-2 ${soft[m.color]}`}>
           <Lane icon="finance" title="Build & learn" items={m.build} />
           <Lane icon="mail" title="Apply & network" items={m.apply} />
-          {mine && <Lane icon="calendar" title="Checkpoints (private)" items={m.checkpoint} />}
         </div>
         <div className="flex flex-wrap items-center justify-between gap-4 bg-card p-6">
           <p className="flex items-center gap-2 font-bold"><Icon name="check" />Done when: <span className="font-medium">{m.deliverable}</span></p>
@@ -194,13 +193,6 @@ export function Roadmap({ mine, open }: { mine: boolean; open: (item: ModalItem)
         ))}
       </ol>
 
-      {mine && (
-        <div className="grid gap-3 md:grid-cols-3">
-          {scenarios.map((s) => (
-            <div key={s.name} className={`tile p-5 ${soft[s.color]}`}><span className={`inline-block rounded-full px-3 py-1 text-sm font-bold ${solid[s.color]}`}>{s.name}</span><p className="mt-3">{s.what}</p></div>
-          ))}
-        </div>
-      )}
     </section>
   );
 }

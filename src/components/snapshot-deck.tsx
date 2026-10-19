@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
+import { Icon, type IconName } from "@/components/icons";
 import photo from "@/assets/photo.png.asset.json";
 import cvIt from "@/assets/cv-it-preview.png.asset.json";
 import cvEn from "@/assets/cv-preview.png.asset.json";
 import { documents } from "@/data/profile";
 import type { ModalItem } from "@/components/ui-blocks";
 
-const slides = [
-  { src: photo.url, alt: "Photo of Soumyakanta Bera", label: "Me", doc: null },
-  { src: cvIt.url, alt: "Italian CV - front page", label: "CV · IT", doc: 5 },
-  { src: cvEn.url, alt: "English CV - front page", label: "CV · EN", doc: 4 },
-] as const;
+const slides: { src: string; alt: string; label: string; doc: number | null; icon: IconName }[] = [
+  { src: photo.url, alt: "Photo of Soumyakanta Bera", label: "Me", doc: null, icon: "user" },
+  { src: cvIt.url, alt: "Italian CV - front page", label: "CV · IT", doc: 5, icon: "language" },
+  { src: cvEn.url, alt: "English CV - front page", label: "CV · EN", doc: 4, icon: "cv" },
+];
 
 export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
   const [i, setI] = useState(0);
@@ -47,9 +48,9 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
       </button>
       <div className="mt-4 flex items-center gap-1" role="tablist" aria-label="Snapshots">
         {slides.map((s, k) => (
-          <button key={s.label} role="tab" aria-selected={k === i} onClick={() => { setI(k); setSeq((v) => v + 1); }}
-            className={`min-h-11 rounded-full px-3 text-xs font-bold uppercase tracking-wide ${k === i ? "bg-ink-foreground text-ink" : "opacity-90"}`}>
-            {s.label}
+          <button key={s.label} role="tab" aria-selected={k === i} aria-label={s.alt} title={s.alt} onClick={() => { setI(k); setSeq((v) => v + 1); }}
+            className={`grid min-h-11 min-w-11 place-items-center rounded-full text-ink ${k === i ? "bg-ink-foreground text-ink" : "opacity-90"}`}>
+            <Icon name={s.icon} width={20} height={20} />
           </button>
         ))}
       </div>
