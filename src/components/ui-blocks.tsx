@@ -41,8 +41,11 @@ export function SectionTitle({ kicker, title, children }: { kicker: string; titl
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
       <div>
-        <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">{kicker}</p>
-        <h2 className="mt-1 text-3xl font-bold tracking-tight md:text-4xl">{title}</h2>
+        <p className="inline-flex items-center gap-2 rounded-full bg-ink px-3 py-1 text-xs font-bold uppercase tracking-widest text-ink-foreground">
+          <span aria-hidden className="h-2 w-2 rounded-full bg-yellow" />
+          {kicker}
+        </p>
+        <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-5xl"><span className="highlight">{title}</span></h2>
       </div>
       {children}
     </div>
