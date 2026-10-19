@@ -5,7 +5,7 @@ import type { Color, Status } from "./profile";
 export type Month = {
   id: string; label: string; range: string; status: Status; color: Color; theme: string;
   projectHours: number; applications: number;
-  build: string[]; apply: string[]; checkpoint: string[]; // checkpoint = private (My mode only)
+  build: string[]; apply: string[];
   deliverable: string; tools: Brand[];
 };
 
@@ -24,7 +24,6 @@ export const months: Month[] = [
       "Register with Michael Page, Hays, Robert Walters",
       "AlmaLaurea profile + LinkedIn update with certificates",
     ],
-    checkpoint: ["Patronato booked; DID if advised; keep every payslip"],
     deliverable: "3 public repositories + GitHub link on every CV",
     tools: ["github", "linkedin", "microsoft", "sap", "kpmg", "dxc"],
   },
@@ -38,7 +37,6 @@ export const months: Month[] = [
       "Build the Power BI report on the reconciled star schema",
     ],
     apply: ["4 tailored applications a week (2 finance, 1 data, 1 BA)", "1 agency contact a week", "2 LinkedIn messages a week to alumni"],
-    checkpoint: ["Patronato answers written down"],
     deliverable: "Working Power BI report = Excel pack to the euro",
     tools: ["python", "pandas", "microsoft", "github", "indeed"],
   },
@@ -52,7 +50,6 @@ export const months: Month[] = [
       "Start Kaggle Intro + Advanced SQL (about 8 h, free)",
     ],
     apply: ["4 a week; credit ads lead with the thesis", "Agencies: finance back-office, controlling, reporting"],
-    checkpoint: ["15 Dec: fewer than 2 interviews = pessimistic track, lean on agencies"],
     deliverable: "P1 in LinkedIn Featured + 1-page thesis card",
     tools: ["github", "ssrn", "kaggle", "linkedin", "microsoft"],
   },
@@ -66,7 +63,6 @@ export const months: Month[] = [
       "3-year forecast with 3 scenarios; SQL ratio checks",
     ],
     apply: ["Trainee and intern intakes (after the permit check)", "2027 graduate programmes (English)", "India Young Professionals ballot on GOV.UK if 30 or younger"],
-    checkpoint: ["31 Jan: no offer in progress = prepare the permit file"],
     deliverable: "Live Excel model with forecast + SQL check layer",
     tools: ["microsoft", "bigquery", "kaggle", "accenture", "glassdoor"],
   },
@@ -80,7 +76,6 @@ export const months: Month[] = [
       "2-page credit memo; CV line added and CV tests rerun",
     ],
     apply: ["4 a week", "Jira board with P1 user stories only if BA interviews come"],
-    checkpoint: ["15 Feb: permit file ready"],
     deliverable: "P2 published: model, 8 Power BI pages, credit memo",
     tools: ["microsoft", "python", "pandas", "github", "jira"],
   },
@@ -94,7 +89,6 @@ export const months: Month[] = [
       "P4 credit pack only if credit interviews come",
     ],
     apply: ["4 a week", "Follow up every open process"],
-    checkpoint: ["File the permit before the card expires; check any offer with the patronato"],
     deliverable: "Rehearsed stories for every project",
     tools: ["linkedin", "indeed", "glassdoor", "microsoft"],
   },
@@ -131,8 +125,3 @@ export const weeklyRhythm: { label: string; time: string; color: Color }[] = [
   { label: "Sunday log and review", time: "10 min", color: "yellow" },
 ];
 
-export const scenarios: { name: string; what: string; color: Color }[] = [
-  { name: "Optimistic", what: "Junior contract by Jan - Feb 2027", color: "green" },
-  { name: "Realistic", what: "1-2 interviews a month from Dec; agency or temporary contract in spring", color: "yellow" },
-  { name: "Pessimistic", what: "Few interviews by Jan; keep the weekly system running through 2027", color: "orange" },
-];
