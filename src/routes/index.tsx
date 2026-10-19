@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/icons";
+import { BrandLogo } from "@/components/brand-logos";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
 import { certificates, defaultActions, documents, privateNotes, profile, projects, roadmap, stats, tracks, type TrackId } from "@/data/profile";
 
@@ -72,7 +73,7 @@ function Index() {
             <p className="mt-2 flex items-center gap-2 opacity-90"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><Icon name="linkedin" />LinkedIn</a>
+              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
               <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-ink-foreground px-5 py-3 font-bold text-ink tile-hover"><Icon name="mail" />Email</a>
             </div>
           </div>
@@ -242,7 +243,7 @@ function Index() {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
             {certificates.map((c) => (
               <div key={c.name} className={`tile p-5 ${c.status === "done" ? soft[c.color] : soft[c.color] + " " + statusClass[c.status]}`}>
-                <span className={`grid h-10 w-10 place-items-center rounded-xl ${solid[c.color]}`}><Icon name={c.status === "done" ? "badge" : "gear"} width={22} height={22} /></span>
+                <span className="inline-flex h-12 items-center gap-2 rounded-xl bg-card px-3">{c.brands.map((b) => <BrandLogo key={b} brand={b} size={26} />)}</span>
                 <p className="mt-3 font-bold leading-tight">{c.name}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{c.issuer}</p>
                 {c.status !== "done" && <div className="mt-2"><StatusChip status={c.status} /></div>}
@@ -278,7 +279,7 @@ function Index() {
           <div className="grid gap-3">
             <a href={`mailto:${profile.email}`} className="flex items-center gap-3 rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>
             <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl bg-orange p-4 font-bold text-orange-ink tile-hover"><Icon name="language" />{profile.phone}</a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><Icon name="linkedin" />linkedin.com/in/soumyakantabera</a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
           </div>
         </section>
         <p className="pb-6 text-center text-sm text-muted-foreground">© 2026 Soumyakanta Bera · Milan</p>

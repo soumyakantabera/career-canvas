@@ -1,6 +1,7 @@
 import { useEffect, type ReactNode } from "react";
 import type { Color, Status } from "@/data/profile";
 import { Icon } from "./icons";
+import { BrandLogo } from "./brand-logos";
 
 export const solid: Record<Color, string> = {
   blue: "bg-blue text-blue-ink",
@@ -81,7 +82,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
               {item.links.map((l) => (
                 <a key={l.url + l.label} href={l.url} target="_blank" rel="noreferrer" download={l.kind === "download" || undefined}
                   className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-ink-foreground tile-hover">
-                  <Icon name={l.kind === "pdf" ? "pdf" : l.kind} width={18} height={18} />{l.label}
+                  {l.kind === "github" ? <BrandLogo brand="github" mono size={18} /> : /ssrn|doi\.org/.test(l.url) ? <BrandLogo brand="ssrn" mono size={18} /> : /linkedin\.com/.test(l.url) ? <BrandLogo brand="linkedin" mono size={18} /> : <Icon name={l.kind === "pdf" ? "pdf" : l.kind} width={18} height={18} />}{l.label}
                 </a>
               ))}
             </div>

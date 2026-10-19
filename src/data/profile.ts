@@ -1,4 +1,5 @@
 import type { IconName } from "@/components/icons";
+import type { Brand } from "@/components/brand-logos";
 import cvFinEN from "@/assets/docs/Soumyakanta_Bera_CV_FinancialAnalyst-FPA-CreditRisk_EN_v5.pdf.asset.json";
 import cvFinIT from "@/assets/docs/Soumyakanta_Bera_CV_AnalistaFinanziario-FPA-CreditoRischio_IT_v5.pdf.asset.json";
 import cvDataEN from "@/assets/docs/Soumyakanta_Bera_CV_DataAnalyst-BusinessAnalyst_EN_v5.pdf.asset.json";
@@ -139,16 +140,16 @@ export const roadmap: { title: string; when: string; hours: string; status: Stat
   { title: "Italian B1 → B2 practice", when: "Weekly", hours: "ongoing", status: "planned", color: "green", icon: "language" },
 ];
 
-export const certificates: { name: string; issuer: string; status: Status; color: Color }[] = [
-  { name: "Financial Analysis & Modeling", issuer: "CFI", status: "done", color: "blue" },
-  { name: "Power BI Data Analyst", issuer: "Microsoft · Coursera", status: "done", color: "yellow" },
-  { name: "Google Data Analytics", issuer: "Google", status: "done", color: "green" },
-  { name: "Microsoft Excel", issuer: "Microsoft", status: "done", color: "green" },
-  { name: "8 Finance Essentials", issuer: "LSEG", status: "done", color: "blue" },
-  { name: "Private Equity & VC", issuer: "Bocconi", status: "done", color: "orange" },
-  { name: "QuickSight · Cloud Practitioner", issuer: "AWS", status: "done", color: "orange" },
-  { name: "Building with the Claude API", issuer: "Anthropic", status: "done", color: "yellow" },
-  { name: "SAP S/4HANA Management Accounting", issuer: "SAP", status: "progress", color: "blue" },
+export const certificates: { name: string; issuer: string; status: Status; color: Color; brands: Brand[] }[] = [
+  { name: "Financial Analysis & Modeling", issuer: "CFI", brands: ["cfi"], status: "done", color: "blue" },
+  { name: "Power BI Data Analyst", issuer: "Microsoft · Coursera", brands: ["microsoft","coursera"], status: "done", color: "yellow" },
+  { name: "Google Data Analytics", issuer: "Google", brands: ["google"], status: "done", color: "green" },
+  { name: "Microsoft Excel", issuer: "Microsoft", brands: ["microsoft"], status: "done", color: "green" },
+  { name: "8 Finance Essentials", issuer: "LSEG", brands: ["lseg"], status: "done", color: "blue" },
+  { name: "Private Equity & VC", issuer: "Bocconi", brands: ["bocconi"], status: "done", color: "orange" },
+  { name: "QuickSight · Cloud Practitioner", issuer: "AWS", brands: ["aws"], status: "done", color: "orange" },
+  { name: "Building with the Claude API", issuer: "Anthropic", brands: ["anthropic"], status: "done", color: "yellow" },
+  { name: "SAP S/4HANA Management Accounting", issuer: "SAP", brands: ["sap"], status: "progress", color: "blue" },
 ];
 
 export const documents: { title: string; sub: string; url: string; icon: IconName; color: Color; ext: string }[] = [
