@@ -14,21 +14,22 @@ const slides = [
 export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [seq, setSeq] = useState(0); // bumping this restarts the countdown
   useEffect(() => {
     if (paused) return;
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 3500);
     return () => clearInterval(t);
-  }, [paused]);
+  }, [paused, seq]);
 
   const onTop = () => {
     const s = slides[i]!;
-    if (s.doc === null) { setI(1); return; }
+    if (s.doc === null) { setI(1); setSeq((v) => v + 1); return; }
     const d = documents[s.doc]!;
     open({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] });
   };
 
   return (
-    <div className="justify-self-start sm:justify-self-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <div className="flex flex-col items-center justify-self-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <button onClick={onTop} aria-label={slides[i]!.doc === null ? "Show my CV" : `Preview ${slides[i]!.label}`} className="relative block h-60 w-44 sm:w-40 md:h-64 md:w-48">
         {slides.map((s, k) => {
           const pos = (k - i + slides.length) % slides.length; // 0 = top
@@ -46,7 +47,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
       </button>
       <div className="mt-4 flex items-center gap-1" role="tablist" aria-label="Snapshots">
         {slides.map((s, k) => (
-          <button key={s.label} role="tab" aria-selected={k === i} onClick={() => { setI(k); setPaused(true); }}
+          <button key={s.label} role="tab" aria-selected={k === i} onClick={() => { setI(k); setSeq((v) => v + 1); }}
             className={`min-h-11 rounded-full px-3 text-xs font-bold uppercase tracking-wide ${k === i ? "bg-ink-foreground text-ink" : "opacity-90"}`}>
             {s.label}
           </button>
