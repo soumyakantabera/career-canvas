@@ -66,6 +66,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
     return () => { window.removeEventListener("keydown", k); document.body.style.overflow = ""; };
   }, [item, onClose]);
   if (!item) return null;
+  const pages = item.embed ? pdfPages(item.embed) : null;
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-ink/60 p-0 md:items-center md:p-6 animate-in fade-in" onClick={onClose} role="dialog" aria-modal="true" aria-label={item.title}>
       <div className="flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-3xl bg-card md:rounded-3xl animate-in slide-in-from-bottom-4" onClick={(e) => e.stopPropagation()}>
@@ -75,11 +76,17 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
         </div>
         <div className="overflow-y-auto p-5">
           {item.body && <p className="text-base leading-relaxed text-muted-foreground">{item.body}</p>}
-          {item.embed && (
+          {item.embed && (pages ? (
+            <div className="mt-4 space-y-3">
+              {pages.map((src, n) => (
+                <img key={src} src={src} alt={`${item.title} - page ${n + 1}`} loading={n === 0 ? "eager" : "lazy"} className="w-full rounded-2xl bg-muted shadow-md" />
+              ))}
+            </div>
+          ) : (
             <div className="mt-4 overflow-hidden rounded-2xl bg-muted">
               <iframe src={item.embed} title={item.title} className="h-[60vh] w-full" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" />
             </div>
-          )}
+          ))}
           {item.links && item.links.length > 0 && (
             <div className="mt-5 flex flex-wrap gap-2">
               {item.links.map((l) => (
@@ -90,7 +97,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
               ))}
             </div>
           )}
-          {item.embed && <p className="mt-3 text-xs text-muted-foreground">If the preview stays empty, the site blocks embedding - use the button above to open it.</p>}
+          {item.embed && !pages && <p className="mt-3 text-xs text-muted-foreground">If the preview stays empty, the site blocks embedding - use the button above to open it.</p>}
         </div>
       </div>
     </div>
