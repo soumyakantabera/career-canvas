@@ -75,18 +75,28 @@ function Index() {
         {/* Hero bento */}
         <section className="grid gap-4 md:grid-cols-12">
           <div className="tile bg-ink p-7 text-ink-foreground md:col-span-7 md:row-span-3 md:p-10">
-            <span className="inline-flex items-center gap-2 rounded-full bg-green px-3 py-1 text-sm font-bold text-green-ink">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-green-ink" /> Available now
-            </span>
-            <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">{profile.name}</h1>
-            <p className="mt-4 text-lg opacity-90 md:text-xl">{profile.title} · University of Florence 2026</p>
-            <p className="mt-2 flex items-center gap-2 opacity-90"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
-              <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
-              <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-ink-foreground px-5 py-3 font-bold text-ink tile-hover"><Icon name="mail" />Email</a>
-              <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 font-bold text-orange-ink tile-hover"><BrandLogo brand="github" mono />GitHub</a>
-
+            <div className="grid items-center gap-6 sm:grid-cols-[1fr_auto]">
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full bg-green px-3 py-1 text-sm font-bold text-green-ink">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-green-ink" /> Available now
+                </span>
+                <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">{profile.name}</h1>
+                <p className="mt-4 text-lg opacity-90 md:text-xl">{profile.title} · University of Florence 2026</p>
+                <p className="mt-2 flex items-center gap-2 opacity-90"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
+                  <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
+                  <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-ink-foreground px-5 py-3 font-bold text-ink tile-hover"><Icon name="mail" />Email</a>
+                  <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 font-bold text-orange-ink tile-hover"><BrandLogo brand="github" mono />GitHub</a>
+                </div>
+              </div>
+              <button
+                onClick={() => setModal({ title: documents[4]!.title, embed: documents[4]!.url, links: [{ label: "Download", url: documents[4]!.url, kind: "download" }] })}
+                className="justify-self-start sm:justify-self-center sm:row-span-1" aria-label="Preview my CV"
+              >
+                <img src={cvPreview.url} alt="My CV - front page" className="w-44 rotate-2 rounded-xl bg-card shadow-2xl transition-transform tile-hover sm:w-40 md:w-48" loading="eager" />
+                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide opacity-90"><Icon name="cv" width={16} height={16} />CV snapshot · tap to open</span>
+              </button>
             </div>
           </div>
           {tracks.map((t) => (
