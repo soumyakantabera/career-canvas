@@ -78,14 +78,15 @@
   --blue: oklch(0.49 0.22 264);        /* ~#1D4ED8 */
   --blue-ink: oklch(0.99 0 0);          /* white on blue 6.7:1 */
   --blue-soft: oklch(0.94 0.04 255);
-  --orange: oklch(0.7 0.21 45);         /* ~#F97316 */
-  --orange-ink: oklch(0.18 0.01 265);   /* near-black 7:1 */
+  /* All solid tiles carry white text; bases deepened just enough for AA */
+  --orange: oklch(0.6 0.2 42);          /* deep orange, white ~4.6:1 */
+  --orange-ink: oklch(0.99 0 0);
   --orange-soft: oklch(0.95 0.04 60);
-  --green: oklch(0.72 0.2 148);        /* ~#16A34A */
-  --green-ink: oklch(0.2 0.05 150);     /* dark green 5.4:1 */
+  --green: oklch(0.55 0.16 148);        /* deep green, white ~4.9:1 */
+  --green-ink: oklch(0.99 0 0);
   --green-soft: oklch(0.95 0.05 150);
-  --yellow: oklch(0.87 0.19 95);        /* ~#FACC15 */
-  --yellow-ink: oklch(0.2 0.01 265);
+  --yellow: oklch(0.58 0.14 75);        /* amber/mustard, white ~4.6:1 */
+  --yellow-ink: oklch(0.99 0 0);
   --yellow-soft: oklch(0.97 0.06 95);
 
   --planned-foreground: oklch(0.4 0.02 265);
