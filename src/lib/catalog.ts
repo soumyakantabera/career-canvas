@@ -2,7 +2,7 @@ import { certificates, documents, projects, tracks } from "@/data/profile";
 import { months } from "@/data/plan";
 
 // One flat list of everything a visitor can be pointed to. Shared by the AI prompt and the UI.
-export type CatalogItem = { id: string; kind: "project" | "track" | "certificate" | "document" | "month"; title: string; text: string; url?: string };
+export type CatalogItem = { id: string; kind: "project" | "track" | "certificate" | "document" | "month"; title: string; text: string; url?: string | undefined };
 
 export function getCatalog(): CatalogItem[] {
   return [
