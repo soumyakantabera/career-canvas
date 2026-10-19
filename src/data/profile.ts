@@ -21,7 +21,7 @@ export const profile = {
   phone: "+39 347 924 9860",
   linkedin: "https://linkedin.com/in/soumyakantabera",
   github: "https://github.com/soumyakantabera", // add your GitHub URL here to show the GitHub button
-  openTo: "Junior roles in Milan, Turin, Bologna or remote",
+  openTo: "Junior roles in Milan, Turin, Bologna · on-site, hybrid or remote",
 };
 
 export const stats = [

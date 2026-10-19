@@ -1,0 +1,21 @@
+# One-click deploy: GitHub → Actions → "Deploy site" → Run workflow.
+# Needs repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
+name: Deploy site
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+concurrency: { group: deploy, cancel-in-progress: true }
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      - name: Deploy to Cloudflare Workers
+        run: bunx wrangler@latest deploy --config dist/server/wrangler.json --name soumyakanta-portfolio
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
