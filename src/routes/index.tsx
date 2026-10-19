@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Icon } from "@/components/icons";
 import { BrandLogo } from "@/components/brand-logos";
+import { Roadmap } from "@/components/roadmap";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
-import { certificates, defaultActions, documents, privateNotes, profile, projects, roadmap, stats, tracks, type TrackId } from "@/data/profile";
+import { certificates, defaultActions, documents, privateNotes, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -180,8 +181,8 @@ function Index() {
                       </li>
                     ))}
                   </ul>
-                  <p className="mt-4 text-xs font-bold uppercase text-muted-foreground">Honest gaps</p>
-                  <p className="text-sm text-muted-foreground">{t.gaps.join(" · ")}</p>
+                  {mine && (<><p className="mt-4 text-xs font-bold uppercase text-muted-foreground">Gaps (private)</p>
+                  <p className="text-sm text-muted-foreground">{t.gaps.join(" · ")}</p></>)}
                   <div className="mt-auto flex gap-2 pt-5">
                     {t.cv.map((c) => <button key={c.label} onClick={() => setModal({ title: `${t.title} - ${c.label}`, embed: c.url, links: [{ label: "Download PDF", url: c.url, kind: "download" }] })} className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground tile-hover"><Icon name="cv" width={18} height={18} />{c.label}</button>)}
                   </div>
@@ -216,26 +217,7 @@ function Index() {
           </div>
         </section>
 
-        {/* Roadmap */}
-        <section id="roadmap">
-          <SectionTitle kicker="Oct 2026 - Mar 2027" title="Next 6 months" />
-          <div className="relative">
-            <div className="absolute left-5 top-0 h-full w-1 rounded-full bg-muted md:left-0 md:top-6 md:h-1 md:w-full" />
-            <ol tabIndex={0} aria-label="Six-month roadmap" className="relative grid gap-4 md:grid-flow-col md:auto-cols-[minmax(220px,1fr)] md:overflow-x-auto md:pb-4">
-              {roadmap.map((r) => (
-                <li key={r.title} className={`flex gap-4 md:flex-col ${statusClass[r.status]}`}>
-                  <span className={`z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full ${r.status === "planned" ? soft[r.color] : solid[r.color]}`}><Icon name={r.icon} width={22} height={22} /></span>
-                  <div className={`tile flex-1 p-5 ${r.status === "planned" ? soft[r.color] : "bg-card"}`}>
-                    <StatusChip status={r.status} />
-                    <h3 className="mt-3 font-bold">{r.title}</h3>
-                    <p className="text-sm text-muted-foreground">{r.when} · {r.hours}</p>
-                    {r.progress !== undefined && <div className="mt-3"><Progress value={r.progress} label={r.title} /></div>}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+        <Roadmap mine={mine} />
 
         {/* Certificates */}
         <section id="certs">
