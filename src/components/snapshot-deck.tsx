@@ -1,8 +1,9 @@
+import { file } from "@/lib/files";
 import { useEffect, useState } from "react";
 import { Icon, type IconName } from "@/components/icons";
-import photo from "@/assets/photo.png.asset.json";
-import cvIt from "@/assets/cv-it-preview.png.asset.json";
-import cvEn from "@/assets/cv-preview.png.asset.json";
+const photo = file("photo.png");
+const cvIt = file("cv-it-preview.png");
+const cvEn = file("cv-preview.png");
 import { documents } from "@/data/profile";
 import type { ModalItem } from "@/components/ui-blocks";
 

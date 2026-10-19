@@ -1,13 +1,14 @@
+import { file } from "@/lib/files";
 import type { IconName } from "@/components/icons";
 import type { Brand } from "@/components/brand-logos";
-import cvFinEN from "@/assets/docs/Soumyakanta_Bera_CV_FinancialAnalyst-FPA-CreditRisk_EN_v5.pdf.asset.json";
-import cvFinIT from "@/assets/docs/Soumyakanta_Bera_CV_AnalistaFinanziario-FPA-CreditoRischio_IT_v5.pdf.asset.json";
-import cvDataEN from "@/assets/docs/Soumyakanta_Bera_CV_DataAnalyst-BusinessAnalyst_EN_v5.pdf.asset.json";
-import cvDataIT from "@/assets/docs/Soumyakanta_Bera_CV_AnalistaDati-BusinessAnalyst_IT_v5.pdf.asset.json";
-import cvGenEN from "@/assets/docs/Bera_Soumyakanta_CV_EN.pdf.asset.json";
-import cvGenIT from "@/assets/docs/Bera_Soumyakanta_CV_IT.pdf.asset.json";
-import cvGenDocx from "@/assets/docs/Bera_Soumyakanta_CV_EN.docx.asset.json";
-import navaro from "@/assets/docs/Scheda_progetto_Navaro_Casa_IT.pdf.asset.json";
+const cvFinEN = file("Soumyakanta_Bera_CV_FinancialAnalyst-FPA-CreditRisk_EN_v5.pdf");
+const cvFinIT = file("Soumyakanta_Bera_CV_AnalistaFinanziario-FPA-CreditoRischio_IT_v5.pdf");
+const cvDataEN = file("Soumyakanta_Bera_CV_DataAnalyst-BusinessAnalyst_EN_v5.pdf");
+const cvDataIT = file("Soumyakanta_Bera_CV_AnalistaDati-BusinessAnalyst_IT_v5.pdf");
+const cvGenEN = file("Bera_Soumyakanta_CV_EN.pdf");
+const cvGenIT = file("Bera_Soumyakanta_CV_IT.pdf");
+const cvGenDocx = file("Bera_Soumyakanta_CV_EN.docx");
+const navaro = file("Scheda_progetto_Navaro_Casa_IT.pdf");
 
 export type Status = "done" | "progress" | "planned";
 export type Color = "blue" | "orange" | "green" | "yellow";
