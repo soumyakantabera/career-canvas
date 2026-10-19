@@ -65,7 +65,7 @@ export const months: Month[] = [
       "Reclassified statements and ratios vs peers",
       "3-year forecast with 3 scenarios; SQL ratio checks",
     ],
-    apply: ["Trainee and intern intakes", "2027 graduate programmes (English)", "jobsinmilan.com weekly"],
+    apply: ["Trainee and intern intakes (after the permit check)", "2027 graduate programmes (English)", "India Young Professionals ballot on GOV.UK if 30 or younger"],
     checkpoint: ["31 Jan: no offer in progress = prepare the permit file"],
     deliverable: "Live Excel model with forecast + SQL check layer",
     tools: ["microsoft", "bigquery", "kaggle", "accenture", "glassdoor"],
