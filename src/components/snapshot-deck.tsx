@@ -14,11 +14,12 @@ const slides = [
 export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [seq, setSeq] = useState(0); // bumping this restarts the countdown
   useEffect(() => {
     if (paused) return;
     const t = setInterval(() => setI((v) => (v + 1) % slides.length), 3500);
     return () => clearInterval(t);
-  }, [paused]);
+  }, [paused, seq]);
 
   const onTop = () => {
     const s = slides[i]!;
@@ -28,7 +29,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
   };
 
   return (
-    <div className="justify-self-start sm:justify-self-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <div className="flex flex-col items-center justify-self-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <button onClick={onTop} aria-label={slides[i]!.doc === null ? "Show my CV" : `Preview ${slides[i]!.label}`} className="relative block h-60 w-44 sm:w-40 md:h-64 md:w-48">
         {slides.map((s, k) => {
           const pos = (k - i + slides.length) % slides.length; // 0 = top
