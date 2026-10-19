@@ -7,8 +7,8 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 // GitHub Pages build (set in CI): prerender every page to static HTML under BASE_PATH.
-const pages = process.env.GITHUB_PAGES === "true";
-const base = process.env.BASE_PATH || "/";
+const pages = process.env["GITHUB_PAGES"] === "true";
+const base = process.env["BASE_PATH"] || "/";
 
 export default defineConfig({
   vite: pages ? { base } : {},
