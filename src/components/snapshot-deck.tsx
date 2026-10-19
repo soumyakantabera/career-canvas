@@ -25,14 +25,31 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
 
   const onTop = () => {
     const s = slides[i]!;
-    if (s.doc === null) { setI(1); setSeq((v) => v + 1); return; }
+    if (s.doc === null) {
+      setI(1);
+      setSeq((v) => v + 1);
+      return;
+    }
     const d = documents[s.doc]!;
-    open({ title: d.title, embed: d.url, previewImage: d.preview, links: [{ label: "Download", url: d.url, kind: "download" }] });
+    open({
+      title: d.title,
+      embed: d.url,
+      previewImage: d.preview,
+      links: [{ label: "Download", url: d.url, kind: "download" }],
+    });
   };
 
   return (
-    <div className="flex flex-col items-center justify-self-center" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <button onClick={onTop} aria-label={slides[i]!.doc === null ? "Show my CV" : `Preview ${slides[i]!.label}`} className="relative block h-60 w-44 sm:w-40 md:h-64 md:w-48">
+    <div
+      className="flex flex-col items-center justify-self-center"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <button
+        onClick={onTop}
+        aria-label={slides[i]!.doc === null ? "Show my CV" : `Preview ${slides[i]!.label}`}
+        className="relative block h-60 w-44 sm:w-40 md:h-64 md:w-48"
+      >
         {slides.map((s, k) => {
           const pos = (k - i + slides.length) % slides.length; // 0 = top
           const style = [
@@ -41,16 +58,31 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
             "z-10 rotate-6 translate-x-3 translate-y-4 saturate-50",
           ][pos];
           return (
-            <img key={s.label} src={s.src} alt={pos === 0 ? s.alt : ""} aria-hidden={pos !== 0}
+            <img
+              key={s.label}
+              src={s.src}
+              alt={pos === 0 ? s.alt : ""}
+              aria-hidden={pos !== 0}
               loading="eager"
-              className={`absolute inset-0 h-full w-full rounded-xl bg-card object-cover object-top shadow-2xl transition-all duration-500 ${style}`} />
+              className={`absolute inset-0 h-full w-full rounded-xl bg-card object-cover object-top shadow-2xl transition-all duration-500 ${style}`}
+            />
           );
         })}
       </button>
       <div className="mt-4 flex items-center gap-1" role="tablist" aria-label="Snapshots">
         {slides.map((s, k) => (
-          <button key={s.label} role="tab" aria-selected={k === i} aria-label={s.alt} title={s.alt} onClick={() => { setI(k); setSeq((v) => v + 1); }}
-            className={`grid min-h-11 min-w-11 place-items-center rounded-full ${k === i ? "bg-ink-foreground text-ink" : "bg-ink-foreground/20 text-ink-foreground"}`}>
+          <button
+            key={s.label}
+            role="tab"
+            aria-selected={k === i}
+            aria-label={s.alt}
+            title={s.alt}
+            onClick={() => {
+              setI(k);
+              setSeq((v) => v + 1);
+            }}
+            className={`grid min-h-11 min-w-11 place-items-center rounded-full ${k === i ? "bg-ink-foreground text-ink" : "bg-ink-foreground/20 text-ink-foreground"}`}
+          >
             <Icon name={s.icon} width={20} height={20} />
           </button>
         ))}
