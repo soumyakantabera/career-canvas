@@ -56,10 +56,16 @@ function Index() {
           <nav className="hidden gap-1 md:flex">
             {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium hover:bg-yellow-soft">{l}</a>)}
           </nav>
-          <button onClick={() => setMine(!mine)} aria-pressed={mine}
-            className={`inline-flex items-center gap-2 rounded-full min-h-11 px-4 py-2 text-sm font-bold ${mine ? "bg-ink text-ink-foreground" : "bg-yellow text-yellow-ink"}`}>
-            <Icon name="eye" width={18} height={18} />{mine ? "My mode" : "Showcase"}
-          </button>
+          <div className="flex items-center gap-2">
+            <a href={profile.github} target="_blank" rel="noreferrer" aria-label="Open GitHub profile"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-bold text-ink-foreground tile-hover">
+              <BrandLogo brand="github" mono /><span className="hidden sm:inline">GitHub</span>
+            </a>
+            <button onClick={() => setMine(!mine)} aria-pressed={mine}
+              className={`inline-flex items-center gap-2 rounded-full min-h-11 px-4 py-2 text-sm font-bold ${mine ? "bg-ink text-ink-foreground" : "bg-yellow text-yellow-ink"}`}>
+              <Icon name="eye" width={18} height={18} />{mine ? "My mode" : "Showcase"}
+            </button>
+          </div>
         </div>
       </header>
 

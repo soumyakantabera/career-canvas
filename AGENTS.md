@@ -10,4 +10,4 @@
 <!-- LOVABLE:END -->
 
 - Portfolio content lives in src/data (profile.ts, plan.ts); src/lib/catalog.ts flattens it for the AI recommender - edit data there, not in components.
-- AI recommender is a public createServerFn (src/lib/recommend.functions.ts) returning only catalog IDs + reasons, so the model can't invent items.
+- Role matcher is local TF-IDF in src/lib/matcher.ts (no API) so it works offline and costs nothing.
