@@ -53,7 +53,7 @@ function Index() {
         </div>
       </header>
 
-      <main id="top" className="mx-auto max-w-7xl space-y-20 px-4 py-6 md:px-8 md:py-10">
+      <main id="top" className="mx-auto max-w-7xl space-y-14 px-4 py-6 md:space-y-16 md:px-8 md:py-10">
         {/* Hero bento */}
         <section className="grid gap-4 md:grid-cols-12">
           <div className="tile bg-ink p-7 text-ink-foreground md:col-span-7 md:row-span-3 md:p-10">
