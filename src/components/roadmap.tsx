@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { BrandLogo } from "./brand-logos";
+import { BrandLogo, brandName, brandUrl } from "./brand-logos";
+import { profile } from "@/data/profile";
 import { Icon } from "./icons";
 import { SectionTitle, StatusChip, fill, soft, solid, statusClass } from "./ui-blocks";
 import { months, scenarios, totals, weeklyRhythm } from "@/data/plan";
@@ -111,7 +112,13 @@ export function Roadmap({ mine }: { mine: boolean }) {
         <div className="flex flex-wrap items-center justify-between gap-4 bg-card p-6">
           <p className="flex items-center gap-2 font-bold"><Icon name="check" />Done when: <span className="font-medium">{m.deliverable}</span></p>
           <div className="flex flex-wrap items-center gap-2" aria-label="Tools and companies this month">
-            {m.tools.map((t) => <span key={t} className="grid h-11 min-w-11 place-items-center rounded-xl bg-muted px-2"><BrandLogo brand={t} size={22} /></span>)}
+            {m.tools.map((t) => {
+              const url = t === "github" && profile.github ? profile.github : brandUrl[t];
+              return url ? (
+                <a key={t} href={url} target="_blank" rel="noreferrer" title={`Open ${brandName[t]}`} aria-label={`Open ${brandName[t]} (new tab)`}
+                  className="tile-hover grid h-11 min-w-11 place-items-center rounded-xl bg-muted px-2"><BrandLogo brand={t} size={22} /></a>
+              ) : <span key={t} className="grid h-11 min-w-11 place-items-center rounded-xl bg-muted px-2"><BrandLogo brand={t} size={22} /></span>;
+            })}
           </div>
         </div>
       </div>

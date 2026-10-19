@@ -44,3 +44,22 @@ export function BrandLogo({ brand, size = 24, mono = false }: { brand: Brand; si
     </svg>
   );
 }
+
+/** Where each logo leads visitors: my profile, the project evidence, or the official resource. */
+export const brandUrl: Partial<Record<Brand, string>> = {
+  linkedin: "https://linkedin.com/in/soumyakantabera",
+  github: "https://github.com/",
+  ssrn: "https://doi.org/10.2139/ssrn.7082778",
+  microsoft: "https://learn.microsoft.com/power-bi/",
+  sap: "https://learning.sap.com/",
+  python: "https://www.python.org/",
+  pandas: "https://pandas.pydata.org/",
+  kaggle: "https://www.kaggle.com/learn/intro-to-sql",
+  bigquery: "https://cloud.google.com/bigquery",
+  jira: "https://www.coursera.org/learn/agile-atlassian-jira",
+  indeed: "https://it.indeed.com/",
+  glassdoor: "https://www.glassdoor.it/",
+  accenture: "https://www.accenture.com/it-it/careers",
+  kpmg: "https://kpmg.com/it/it/careers.html",
+  dxc: "https://dxc.com/us/en/careers",
+};
