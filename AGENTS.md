@@ -9,5 +9,5 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Portfolio content lives in src/data (profile.ts, plan.ts); src/lib/catalog.ts flattens it for the AI recommender - edit data there, not in components.
+- Portfolio content lives in src/data (profile.ts, plan.ts); src/lib/catalog.ts flattens it for the local role matcher - edit data there, not in components.
 - Role matcher is local TF-IDF in src/lib/matcher.ts (no API) so it works offline and costs nothing.
