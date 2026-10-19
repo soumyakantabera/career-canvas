@@ -20,6 +20,7 @@ export const profile = {
   email: "bera.soumyakanta@yahoo.com",
   phone: "+39 347 924 9860",
   linkedin: "https://linkedin.com/in/soumyakantabera",
+  github: "", // add your GitHub URL here to show the GitHub button
   openTo: "Junior roles in Milan, Turin, Bologna or remote",
 };
 

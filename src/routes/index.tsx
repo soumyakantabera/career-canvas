@@ -280,6 +280,7 @@ function Index() {
             <a href={`mailto:${profile.email}`} className="flex items-center gap-3 rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>
             <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl bg-orange p-4 font-bold text-orange-ink tile-hover"><Icon name="language" />{profile.phone}</a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
+            {profile.github && <a href={profile.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-ink p-4 font-bold text-ink-foreground tile-hover"><BrandLogo brand="github" mono />GitHub</a>}
           </div>
         </section>
         <p className="pb-6 text-center text-sm text-muted-foreground">© 2026 Soumyakanta Bera · Milan</p>
