@@ -49,8 +49,8 @@ export function SectionTitle({ kicker, title, children }: { kicker: string; titl
 }
 
 export type ModalItem = {
-  title: string; body?: string; embed?: string;
-  links?: { label: string; url: string; kind: "link" | "github" | "pdf" | "download" }[];
+  title: string; body?: string | undefined; embed?: string | undefined;
+  links?: { label: string; url: string; kind: "link" | "github" | "pdf" | "download" }[] | undefined;
 };
 
 export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () => void }) {

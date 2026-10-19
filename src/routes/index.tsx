@@ -71,7 +71,7 @@ function Index() {
             <p className="mt-4 text-lg opacity-90 md:text-xl">{profile.title} · University of Florence 2026</p>
             <p className="mt-2 flex items-center gap-2 opacity-90"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <a href={documents[0].url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
+              <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
               <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><Icon name="linkedin" />LinkedIn</a>
               <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-ink-foreground px-5 py-3 font-bold text-ink tile-hover"><Icon name="mail" />Email</a>
             </div>
@@ -127,7 +127,7 @@ function Index() {
                   <h3 className="text-lg font-bold">Application pipeline</h3>
                   <div className="mt-4 grid grid-cols-3 gap-2">
                     {(["applied", "interview", "offer"] as const).map((k, i) => (
-                      <div key={k} className={`rounded-2xl p-3 text-center ${solid[(["blue", "orange", "green"] as const)[i]]}`}>
+                      <div key={k} className={`rounded-2xl p-3 text-center ${solid[(["blue", "orange", "green"] as const)[i]!]}`}>
                         <p className="text-3xl font-bold">{pipe[k]}</p>
                         <p className="text-xs font-bold uppercase">{k}</p>
                         <div className="mt-2 flex justify-center gap-1">
