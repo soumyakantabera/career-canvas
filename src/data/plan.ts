@@ -17,7 +17,7 @@ export const months: Month[] = [
       "P0: publish 3 GitHub repositories (thesis, budget pack, ETL dashboard)",
       "README per repo: problem, data, method, result, limits, how to run",
       "3-line Italian summary + 1-page PDF per project for LinkedIn Featured",
-      "Finish SAP S/4HANA CO course; 30 finance words in Italian",
+      "Finish SAP S/4HANA Management Accounting (SAP CO) course; 30 finance words in Italian",
     ],
     apply: [
       "First targets: Affinity Petcare, DXC, KPMG",

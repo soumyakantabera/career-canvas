@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Icon } from "@/components/icons";
 import { BrandLogo } from "@/components/brand-logos";
 import { Roadmap } from "@/components/roadmap";
+import { Recommender } from "@/components/recommender";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
 import { certificates, defaultActions, documents, privateNotes, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
 
@@ -28,7 +29,7 @@ function useLocal<T>(key: string, init: T) {
   return [v, set] as const;
 }
 
-const nav = [["tracks", "Tracks"], ["projects", "Projects"], ["roadmap", "Roadmap"], ["certs", "Certificates"], ["docs", "Downloads"], ["contact", "Contact"]];
+const nav = [["match", "Match"], ["tracks", "Tracks"], ["projects", "Projects"], ["roadmap", "Roadmap"], ["certs", "Certificates"], ["docs", "Downloads"], ["contact", "Contact"]];
 
 function Index() {
   const [mine, setMine] = useLocal("sb-mymode", false);
@@ -160,6 +161,8 @@ function Index() {
             </div>
           </section>
         )}
+
+        <Recommender open={setModal} />
 
         {/* Tracks */}
         <section id="tracks">

@@ -20,7 +20,7 @@ export const profile = {
   email: "bera.soumyakanta@yahoo.com",
   phone: "+39 347 924 9860",
   linkedin: "https://linkedin.com/in/soumyakantabera",
-  github: "", // add your GitHub URL here to show the GitHub button
+  github: "https://github.com/soumyakantabera", // add your GitHub URL here to show the GitHub button
   openTo: "Junior roles in Milan, Turin, Bologna or remote",
 };
 
@@ -47,7 +47,7 @@ export const tracks: Track[] = [
       { name: "KPI packs & P&L review", status: "done" },
       { name: "Due-diligence packs", status: "done" },
       { name: "Credit distress signals", status: "done" },
-      { name: "SAP S/4HANA CO", status: "progress" },
+      { name: "SAP S/4HANA Management Accounting (SAP CO)", status: "progress" },
       { name: "Live valuation model (P2)", status: "planned" },
     ],
     gaps: ["SAP in practice", "ERP / Oracle"],
@@ -150,7 +150,8 @@ export const certificates: { name: string; issuer: string; status: Status; color
   { name: "Private Equity & VC", issuer: "Bocconi", brands: ["bocconi"], status: "done", color: "orange" },
   { name: "QuickSight · Cloud Practitioner", issuer: "AWS", brands: ["aws"], status: "done", color: "orange" },
   { name: "Building with the Claude API", issuer: "Anthropic", brands: ["anthropic"], status: "done", color: "yellow" },
-  { name: "SAP S/4HANA Management Accounting", issuer: "SAP", brands: ["sap"], status: "progress", color: "blue" },
+  { name: "Business & Financial Modeling (Decision-Making & Scenarios)", issuer: "Wharton · Coursera", brands: ["coursera"], status: "progress", color: "orange" },
+  { name: "SAP S/4HANA Management Accounting (SAP CO)", issuer: "SAP", brands: ["sap"], status: "progress", color: "blue" },
 ];
 
 export const documents: { title: string; sub: string; url: string; icon: IconName; color: Color; ext: string }[] = [
