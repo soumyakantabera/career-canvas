@@ -12,7 +12,7 @@ export type Month = {
 export const months: Month[] = [
   {
     id: "oct", label: "Oct", range: "12 - 31 Oct 2026", status: "progress", color: "yellow", theme: "Publish what I have",
-    projectHours: 7, applications: 12,
+    projectHours: 7, applications: 16,
     build: [
       "P0: publish 3 GitHub repositories (thesis, budget pack, ETL dashboard)",
       "README per repo: problem, data, method, result, limits, how to run",

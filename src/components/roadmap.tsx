@@ -54,7 +54,7 @@ export function Roadmap({ mine }: { mine: boolean }) {
       <div className="grid gap-4 lg:grid-cols-12">
         {/* Hours bar chart */}
         <div className="tile bg-card p-5 md:p-6 lg:col-span-7">
-          <h3 className="text-lg font-bold">Hours per month <span className="font-medium text-muted-foreground">· line = cumulative</span></h3>
+          <h3 className="text-lg font-bold">Hours per month <span className="font-medium text-muted-foreground">· Σ = running total</span></h3>
           <div className="relative mt-6 flex h-48 items-end gap-3">
             {months.map((x, i) => (
               <div key={x.id} role="img" aria-label={`${x.label}: ${x.projectHours} hours, ${cumulative[i]} hours total`}
@@ -62,7 +62,7 @@ export function Roadmap({ mine }: { mine: boolean }) {
                 <span className="mb-1 text-xs font-bold">{x.projectHours}h</span>
                 <span className={`w-full rounded-t-xl ${fill[x.color]} ${active === x.id ? "ring-4 ring-ink" : ""}`} style={{ height: `${(x.projectHours / maxH) * 75}%` }} />
                 <span className="mt-2 text-xs font-bold">{x.label}</span>
-                <span className="absolute left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-ink" style={{ bottom: `calc(${(cumulative[i]! / totals.projectHours) * 85}% + 1.5rem)` }} title={`${cumulative[i]} h total`} />
+                <span className="text-xs text-muted-foreground">Σ {cumulative[i]}h</span>
               </div>
             ))}
           </div>
