@@ -67,7 +67,7 @@ function Index() {
                 <p className="mt-2 flex items-center gap-2"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
-                  <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
+                  <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-linkedin px-5 py-3 font-bold text-linkedin-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
                   <a href={`mailto:${profile.email}`} className="inline-flex items-center gap-2 rounded-full bg-ink-foreground px-5 py-3 font-bold text-ink tile-hover"><Icon name="mail" />Email</a>
                   <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 font-bold text-orange-ink tile-hover"><BrandLogo brand="github" mono />GitHub</a>
                 </div>
