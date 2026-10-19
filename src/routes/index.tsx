@@ -63,8 +63,8 @@ function Index() {
                   <span className="h-2 w-2 animate-pulse rounded-full bg-green-ink" /> Available now
                 </span>
                 <h1 className="mt-6 text-4xl font-bold leading-[1.05] tracking-tight md:text-6xl">{profile.name}</h1>
-                <p className="mt-4 text-lg opacity-90 md:text-xl">{profile.title} · University of Florence 2026</p>
-                <p className="mt-2 flex items-center gap-2 opacity-90"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
+                <p className="mt-4 text-lg md:text-xl">{profile.title} · University of Florence 2026</p>
+                <p className="mt-2 flex items-center gap-2"><Icon name="pin" width={18} height={18} />{profile.location} · {profile.openTo}</p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <a href={documents[0]!.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-yellow px-5 py-3 font-bold text-yellow-ink tile-hover"><Icon name="download" />Download CV</a>
                   <a href={profile.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-blue px-5 py-3 font-bold text-blue-ink tile-hover"><BrandLogo brand="linkedin" mono />LinkedIn</a>
@@ -77,7 +77,7 @@ function Index() {
           </div>
           {tracks.map((t) => (
             <a key={t.id} href="#tracks" onClick={() => setFilter(t.id)} className={`tile tile-hover flex items-center justify-between p-6 md:col-span-5 md:py-5 ${solid[t.color]}`}>
-              <div><p className="text-2xl font-bold">{t.title}</p><p className="text-sm font-medium opacity-90">{t.roles}</p></div>
+              <div><p className="text-2xl font-bold">{t.title}</p><p className="text-sm font-medium">{t.roles}</p></div>
               <Icon name={t.icon} width={44} height={44} />
             </a>
           ))}
@@ -105,7 +105,7 @@ function Index() {
                 <div className={`p-6 ${solid[t.color]}`}>
                   <div className="flex items-center justify-between"><Icon name={t.icon} width={40} height={40} /><span className="text-sm font-bold">{t.focus}% focus</span></div>
                   <h3 className="mt-4 text-2xl font-bold">{t.title}</h3>
-                  <p className="font-medium opacity-90">{t.roles}</p>
+                  <p className="font-medium">{t.roles}</p>
                 </div>
                 <div className="flex flex-1 flex-col bg-card p-6">
                   <p className="text-muted-foreground">{t.pitch}</p>
@@ -140,7 +140,7 @@ function Index() {
                 className={`tile tile-hover flex flex-col p-6 text-left ${p.status === "done" ? solid[p.color] : soft[p.color]} ${statusClass[p.status]}`}>
                 <div className="flex items-start justify-between gap-3"><Icon name={p.icon} width={40} height={40} /><StatusChip status={p.status} /></div>
                 <h3 className="mt-5 text-xl font-bold">{p.title}</h3>
-                <p className="mt-2 text-sm opacity-90">{p.summary}</p>
+                <p className="mt-2 text-sm">{p.summary}</p>
                 <div className="mt-auto pt-5">
                   {p.progress !== undefined && <div className="mb-3"><Progress value={p.progress} label={p.title} /></div>}
                   <p className="text-sm font-bold">{p.when} →</p>
@@ -175,7 +175,7 @@ function Index() {
               <div key={d.url} className={`tile flex flex-col p-5 ${solid[d.color]}`}>
                 <div className="flex items-center justify-between"><Icon name={d.icon} width={32} height={32} /><span className="rounded-full bg-ink px-2 py-0.5 text-xs font-bold text-ink-foreground">{d.ext}</span></div>
                 <p className="mt-4 text-lg font-bold">{d.title}</p>
-                <p className="text-sm opacity-90">{d.sub}</p>
+                <p className="text-sm">{d.sub}</p>
                 <div className="mt-4 flex gap-2">
                   {d.ext === "PDF" && <button onClick={() => setModal({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] })} className="min-h-11 rounded-full bg-ink px-4 text-sm font-bold text-ink-foreground">Preview</button>}
                   <a href={d.url} download target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 min-h-11 rounded-full bg-ink/15 px-4 text-sm font-bold"><Icon name="download" width={16} height={16} />Download</a>
@@ -189,7 +189,7 @@ function Index() {
         <section id="contact" className="tile grid grid-cols-1 gap-6 bg-blue p-6 md:p-8 text-blue-ink md:grid-cols-2 md:p-12">
           <div>
             <h2 className="text-3xl font-bold md:text-5xl">Let's talk.</h2>
-            <p className="mt-3 text-lg opacity-90">{profile.openTo}. English C1, Italian B1.</p>
+            <p className="mt-3 text-lg">{profile.openTo}. English C1, Italian B1.</p>
           </div>
           <div className="grid min-w-0 gap-3">
             <a href={`mailto:${profile.email}`} className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>

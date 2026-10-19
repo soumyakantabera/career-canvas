@@ -24,8 +24,8 @@ export function Roadmap({ open }: { open: (item: ModalItem) => void }) {
 
       {/* Summary tiles */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-        <div className="tile bg-ink p-5 text-ink-foreground"><p className="text-3xl font-bold">{totals.projectHours} h</p><p className="text-sm opacity-90">project & learning time</p></div>
-        <div className="tile bg-blue p-5 text-blue-ink"><p className="text-3xl font-bold">~{totals.applications}</p><p className="text-sm opacity-90">tailored applications planned</p></div>
+        <div className="tile bg-ink p-5 text-ink-foreground"><p className="text-3xl font-bold">{totals.projectHours} h</p><p className="text-sm">project & learning time</p></div>
+        <div className="tile bg-blue p-5 text-blue-ink"><p className="text-3xl font-bold">~{totals.applications}</p><p className="text-sm">tailored applications planned</p></div>
         <div className="tile bg-orange p-5 text-orange-ink"><p className="text-3xl font-bold">{planProjects.length}</p><p className="text-sm">work streams (P0 - P4 + more)</p></div>
         <div className="tile bg-green p-5 text-green-ink"><p className="text-3xl font-bold">6.5 h</p><p className="text-sm">per week, sized to real life</p></div>
       </div>
