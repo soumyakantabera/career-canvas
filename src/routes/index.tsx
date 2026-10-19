@@ -6,7 +6,7 @@ import { Roadmap } from "@/components/roadmap";
 import { Recommender } from "@/components/recommender";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
 import { certificates, defaultActions, documents, privateNotes, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
-import cvPreview from "@/assets/cv-preview.png.asset.json";
+import { SnapshotDeck } from "@/components/snapshot-deck";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -90,13 +90,7 @@ function Index() {
                   <a href={profile.github} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-orange px-5 py-3 font-bold text-orange-ink tile-hover"><BrandLogo brand="github" mono />GitHub</a>
                 </div>
               </div>
-              <button
-                onClick={() => setModal({ title: documents[4]!.title, embed: documents[4]!.url, links: [{ label: "Download", url: documents[4]!.url, kind: "download" }] })}
-                className="justify-self-start sm:justify-self-center sm:row-span-1" aria-label="Preview my CV"
-              >
-                <img src={cvPreview.url} alt="My CV - front page" className="w-44 rotate-2 rounded-xl bg-card shadow-2xl transition-transform tile-hover sm:w-40 md:w-48" loading="eager" />
-                <span className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide opacity-90"><Icon name="cv" width={16} height={16} />CV snapshot · tap to open</span>
-              </button>
+              <SnapshotDeck open={setModal} />
             </div>
           </div>
           {tracks.map((t) => (
