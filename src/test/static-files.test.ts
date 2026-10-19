@@ -4,8 +4,8 @@ import { describe, expect, it } from "vitest";
 
 // Every download linked from the site must ship in public/files, with exact casing.
 const sources = ["src/data/profile.ts", "src/components/snapshot-deck.tsx"];
-const names = sources.flatMap((p) =>
-  [...readFileSync(resolve(p), "utf8").matchAll(/file\("([^"]+)"\)/g)].map((m) => m[1]),
+const names: string[] = sources.flatMap((p) =>
+  [...readFileSync(resolve(p), "utf8").matchAll(/file\("([^"]+)"\)/g)].map((m) => m[1] ?? ""),
 );
 
 describe("static downloads", () => {
