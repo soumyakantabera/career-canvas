@@ -1,21 +1,39 @@
-# One-click deploy: GitHub → Actions → "Deploy site" → Run workflow.
-# Needs repo secrets CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID.
-name: Deploy site
+# One-click deploy to GitHub Pages: Actions → "Deploy to GitHub Pages" → Run workflow.
+# First time only: repo Settings → Pages → Source = "GitHub Actions".
+name: Deploy to GitHub Pages
 on:
   workflow_dispatch:
   push:
     branches: [main]
-concurrency: { group: deploy, cancel-in-progress: true }
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency: { group: pages, cancel-in-progress: true }
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - id: pages
+        uses: actions/configure-pages@v5
       - run: bun install --frozen-lockfile
-      - run: bun run build
-      - name: Deploy to Cloudflare Workers
-        run: bunx wrangler@latest deploy --config dist/server/wrangler.json --name soumyakanta-portfolio
+      - name: Build static site
+        run: bun run build
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GITHUB_PAGES: "true"
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+      - name: SPA fallback + no Jekyll
+        run: cp dist/client/index.html dist/client/404.html && touch dist/client/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: dist/client }
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: { name: github-pages, url: "${{ steps.d.outputs.page_url }}" }
+    steps:
+      - id: d
+        uses: actions/deploy-pages@v4
