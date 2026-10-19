@@ -271,16 +271,16 @@ function Index() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="tile grid min-w-0 gap-6 bg-blue p-8 text-blue-ink md:grid-cols-2 md:p-12">
+        <section id="contact" className="tile grid grid-cols-1 gap-6 bg-blue p-6 md:p-8 text-blue-ink md:grid-cols-2 md:p-12">
           <div>
             <h2 className="text-3xl font-bold md:text-5xl">Let's talk.</h2>
             <p className="mt-3 text-lg opacity-90">{profile.openTo}. English C1, Italian B1.</p>
           </div>
           <div className="grid min-w-0 gap-3">
-            <a href={`mailto:${profile.email}`} className="flex items-center gap-3 rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>
-            <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="flex items-center gap-3 rounded-2xl bg-orange p-4 font-bold text-orange-ink tile-hover"><Icon name="language" />{profile.phone}</a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
-            {profile.github && <a href={profile.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 rounded-2xl bg-ink p-4 font-bold text-ink-foreground tile-hover"><BrandLogo brand="github" mono />GitHub</a>}
+            <a href={`mailto:${profile.email}`} className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>
+            <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-orange p-4 font-bold text-orange-ink tile-hover"><Icon name="language" />{profile.phone}</a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
+            {profile.github && <a href={profile.github} target="_blank" rel="noreferrer" className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-ink p-4 font-bold text-ink-foreground tile-hover"><BrandLogo brand="github" mono />GitHub</a>}
           </div>
         </section>
         <p className="pb-6 text-center text-sm text-muted-foreground">© 2026 Soumyakanta Bera · Milan</p>
