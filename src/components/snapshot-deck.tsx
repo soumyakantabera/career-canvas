@@ -23,7 +23,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
 
   const onTop = () => {
     const s = slides[i]!;
-    if (s.doc === null) { setI(1); return; }
+    if (s.doc === null) { setI(1); setSeq((v) => v + 1); return; }
     const d = documents[s.doc]!;
     open({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] });
   };
@@ -47,7 +47,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
       </button>
       <div className="mt-4 flex items-center gap-1" role="tablist" aria-label="Snapshots">
         {slides.map((s, k) => (
-          <button key={s.label} role="tab" aria-selected={k === i} onClick={() => { setI(k); setPaused(true); }}
+          <button key={s.label} role="tab" aria-selected={k === i} onClick={() => { setI(k); setSeq((v) => v + 1); }}
             className={`min-h-11 rounded-full px-3 text-xs font-bold uppercase tracking-wide ${k === i ? "bg-ink-foreground text-ink" : "opacity-90"}`}>
             {s.label}
           </button>
