@@ -30,6 +30,7 @@ function useLocal<T>(key: string, init: T) {
 }
 
 const nav = [["match", "Match"], ["tracks", "Tracks"], ["projects", "Projects"], ["roadmap", "Roadmap"], ["certs", "Certificates"], ["docs", "Downloads"], ["contact", "Contact"]];
+const dock: [string, string, IconName][] = [["match", "Match", "flow"], ["projects", "Projects", "dashboard"], ["roadmap", "Roadmap", "calendar"], ["docs", "Docs", "cv"], ["contact", "Contact", "mail"]];
 
 function Index() {
   const [mine, setMine] = useLocal("sb-mymode", false);
