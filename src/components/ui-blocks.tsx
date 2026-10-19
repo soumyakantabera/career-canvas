@@ -29,9 +29,9 @@ export function StatusChip({ status, when }: { status: Status; when?: string }) 
   );
 }
 
-export function Progress({ value }: { value: number }) {
+export function Progress({ value, label = "Progress" }: { value: number; label?: string }) {
   return (
-    <div className="h-2 w-full overflow-hidden rounded-full bg-ink/15" role="progressbar" aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
+    <div className="h-2 w-full overflow-hidden rounded-full bg-ink/15" role="progressbar" aria-label={`${label}: ${value}%`} aria-valuenow={value} aria-valuemin={0} aria-valuemax={100}>
       <div className="stripes h-full rounded-full bg-ink" style={{ width: `${value}%` }} />
     </div>
   );
@@ -68,7 +68,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
       <div className="flex max-h-[92vh] w-full max-w-4xl flex-col overflow-hidden rounded-t-3xl bg-card md:rounded-3xl animate-in slide-in-from-bottom-4" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-start justify-between gap-4 bg-yellow p-5 text-yellow-ink">
           <h3 className="text-xl font-bold">{item.title}</h3>
-          <button autoFocus onClick={onClose} className="rounded-full bg-ink p-2 text-ink-foreground" aria-label="Close"><Icon name="close" width={18} height={18} /></button>
+          <button autoFocus onClick={onClose} className="grid min-h-11 min-w-11 place-items-center rounded-full bg-ink text-ink-foreground" aria-label="Close"><Icon name="close" width={18} height={18} /></button>
         </div>
         <div className="overflow-y-auto p-5">
           {item.body && <p className="text-base leading-relaxed text-muted-foreground">{item.body}</p>}
@@ -81,7 +81,7 @@ export function Modal({ item, onClose }: { item: ModalItem | null; onClose: () =
             <div className="mt-5 flex flex-wrap gap-2">
               {item.links.map((l) => (
                 <a key={l.url + l.label} href={l.url} target="_blank" rel="noreferrer" download={l.kind === "download" || undefined}
-                  className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-medium text-ink-foreground tile-hover">
+                  className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2.5 text-sm font-medium text-ink-foreground tile-hover">
                   {l.kind === "github" ? <BrandLogo brand="github" mono size={18} /> : /ssrn|doi\.org/.test(l.url) ? <BrandLogo brand="ssrn" mono size={18} /> : /linkedin\.com/.test(l.url) ? <BrandLogo brand="linkedin" mono size={18} /> : <Icon name={l.kind === "pdf" ? "pdf" : l.kind} width={18} height={18} />}{l.label}
                 </a>
               ))}

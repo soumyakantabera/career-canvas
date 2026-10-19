@@ -48,14 +48,14 @@ function Index() {
       <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
           <a href="#top" className="flex items-center gap-2 font-bold">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-blue text-blue-ink">SB</span>
+            <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue text-blue-ink">SB</span>
             <span className="hidden sm:inline">Soumyakanta Bera</span>
           </a>
           <nav className="hidden gap-1 md:flex">
-            {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="rounded-full px-3 py-2 text-sm font-medium hover:bg-yellow-soft">{l}</a>)}
+            {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium hover:bg-yellow-soft">{l}</a>)}
           </nav>
           <button onClick={() => setMine(!mine)} aria-pressed={mine}
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-bold ${mine ? "bg-ink text-ink-foreground" : "bg-yellow text-yellow-ink"}`}>
+            className={`inline-flex items-center gap-2 rounded-full min-h-11 px-4 py-2 text-sm font-bold ${mine ? "bg-ink text-ink-foreground" : "bg-yellow text-yellow-ink"}`}>
             <Icon name="eye" width={18} height={18} />{mine ? "My mode" : "Showcase"}
           </button>
         </div>
@@ -128,12 +128,12 @@ function Index() {
                   <h3 className="text-lg font-bold">Application pipeline</h3>
                   <div className="mt-4 grid grid-cols-3 gap-2">
                     {(["applied", "interview", "offer"] as const).map((k, i) => (
-                      <div key={k} className={`rounded-2xl p-3 text-center ${solid[(["blue", "orange", "green"] as const)[i]!]}`}>
+                      <div key={k} className={`rounded-2xl p-2 text-center ${solid[(["blue", "orange", "green"] as const)[i]!]}`}>
                         <p className="text-3xl font-bold">{pipe[k]}</p>
                         <p className="text-xs font-bold uppercase">{k}</p>
                         <div className="mt-2 flex justify-center gap-1">
-                          <button aria-label={`Decrease ${k}`} onClick={() => setPipe({ ...pipe, [k]: Math.max(0, pipe[k] - 1) })} className="h-7 w-7 rounded-full bg-ink/20 font-bold">-</button>
-                          <button aria-label={`Increase ${k}`} onClick={() => setPipe({ ...pipe, [k]: pipe[k] + 1 })} className="h-7 w-7 rounded-full bg-ink/20 font-bold">+</button>
+                          <button aria-label={`Decrease ${k}`} onClick={() => setPipe({ ...pipe, [k]: Math.max(0, pipe[k] - 1) })} className="h-11 w-11 rounded-full bg-ink/20 text-lg font-bold">-</button>
+                          <button aria-label={`Increase ${k}`} onClick={() => setPipe({ ...pipe, [k]: pipe[k] + 1 })} className="h-11 w-11 rounded-full bg-ink/20 text-lg font-bold">+</button>
                         </div>
                       </div>
                     ))}
@@ -141,10 +141,10 @@ function Index() {
                 </div>
                 <div className="tile bg-yellow-soft p-6">
                   <div className="flex items-center justify-between"><h3 className="text-lg font-bold">Hours this week</h3><span className="font-bold">{hours} / 10 h</span></div>
-                  <div className="mt-3"><Progress value={Math.min(100, hours * 10)} /></div>
+                  <div className="mt-3"><Progress value={Math.min(100, hours * 10)} label="Weekly hours" /></div>
                   <div className="mt-3 flex gap-2">
-                    <button onClick={() => setHours(hours + 1)} className="rounded-full bg-ink px-4 py-2 text-sm font-bold text-ink-foreground">+1 h</button>
-                    <button onClick={() => setHours(0)} className="rounded-full bg-card px-4 py-2 text-sm font-bold">Reset week</button>
+                    <button onClick={() => setHours(hours + 1)} className="rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground">+1 h</button>
+                    <button onClick={() => setHours(0)} className="rounded-full bg-card min-h-11 px-4 py-2 text-sm font-bold">Reset week</button>
                   </div>
                 </div>
               </div>
@@ -165,7 +165,7 @@ function Index() {
           <SectionTitle kicker="Three directions" title="Career tracks I'm building" />
           <div className="grid gap-4 lg:grid-cols-3">
             {tracks.map((t) => (
-              <article key={t.id} className={`tile flex flex-col overflow-hidden ${filter !== "all" && filter !== t.id ? "opacity-60" : ""}`}>
+              <article key={t.id} className={`tile flex flex-col overflow-hidden ${filter !== "all" && filter !== t.id ? "saturate-50" : ""}`}>
                 <div className={`p-6 ${solid[t.color]}`}>
                   <div className="flex items-center justify-between"><Icon name={t.icon} width={40} height={40} /><span className="text-sm font-bold">{t.focus}% focus</span></div>
                   <h3 className="mt-4 text-2xl font-bold">{t.title}</h3>
@@ -183,7 +183,7 @@ function Index() {
                   <p className="mt-4 text-xs font-bold uppercase text-muted-foreground">Honest gaps</p>
                   <p className="text-sm text-muted-foreground">{t.gaps.join(" · ")}</p>
                   <div className="mt-auto flex gap-2 pt-5">
-                    {t.cv.map((c) => <button key={c.label} onClick={() => setModal({ title: `${t.title} - ${c.label}`, embed: c.url, links: [{ label: "Download PDF", url: c.url, kind: "download" }] })} className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-bold text-ink-foreground tile-hover"><Icon name="cv" width={18} height={18} />{c.label}</button>)}
+                    {t.cv.map((c) => <button key={c.label} onClick={() => setModal({ title: `${t.title} - ${c.label}`, embed: c.url, links: [{ label: "Download PDF", url: c.url, kind: "download" }] })} className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground tile-hover"><Icon name="cv" width={18} height={18} />{c.label}</button>)}
                   </div>
                 </div>
               </article>
@@ -196,7 +196,7 @@ function Index() {
           <SectionTitle kicker="Proof of work" title="Projects">
             <div className="flex flex-wrap gap-2">
               {([["all", "All"], ["finance", "Finance"], ["data", "Data / BI"], ["ba", "BA"]] as const).map(([id, l]) => (
-                <button key={id} onClick={() => setFilter(id)} aria-pressed={filter === id} className={`rounded-full px-4 py-2 text-sm font-bold ${filter === id ? "bg-ink text-ink-foreground" : "bg-muted"}`}>{l}</button>
+                <button key={id} onClick={() => setFilter(id)} aria-pressed={filter === id} className={`rounded-full min-h-11 px-4 py-2 text-sm font-bold ${filter === id ? "bg-ink text-ink-foreground" : "bg-muted"}`}>{l}</button>
               ))}
             </div>
           </SectionTitle>
@@ -208,7 +208,7 @@ function Index() {
                 <h3 className="mt-5 text-xl font-bold">{p.title}</h3>
                 <p className="mt-2 text-sm opacity-90">{p.summary}</p>
                 <div className="mt-auto pt-5">
-                  {p.progress !== undefined && <div className="mb-3"><Progress value={p.progress} /></div>}
+                  {p.progress !== undefined && <div className="mb-3"><Progress value={p.progress} label={p.title} /></div>}
                   <p className="text-sm font-bold">{p.when} →</p>
                 </div>
               </button>
@@ -221,7 +221,7 @@ function Index() {
           <SectionTitle kicker="Oct 2026 - Mar 2027" title="Next 6 months" />
           <div className="relative">
             <div className="absolute left-5 top-0 h-full w-1 rounded-full bg-muted md:left-0 md:top-6 md:h-1 md:w-full" />
-            <ol className="relative grid gap-4 md:grid-flow-col md:auto-cols-[minmax(220px,1fr)] md:overflow-x-auto md:pb-4">
+            <ol tabIndex={0} aria-label="Six-month roadmap" className="relative grid gap-4 md:grid-flow-col md:auto-cols-[minmax(220px,1fr)] md:overflow-x-auto md:pb-4">
               {roadmap.map((r) => (
                 <li key={r.title} className={`flex gap-4 md:flex-col ${statusClass[r.status]}`}>
                   <span className={`z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full ${r.status === "planned" ? soft[r.color] : solid[r.color]}`}><Icon name={r.icon} width={22} height={22} /></span>
@@ -229,7 +229,7 @@ function Index() {
                     <StatusChip status={r.status} />
                     <h3 className="mt-3 font-bold">{r.title}</h3>
                     <p className="text-sm text-muted-foreground">{r.when} · {r.hours}</p>
-                    {r.progress !== undefined && <div className="mt-3"><Progress value={r.progress} /></div>}
+                    {r.progress !== undefined && <div className="mt-3"><Progress value={r.progress} label={r.title} /></div>}
                   </div>
                 </li>
               ))}
@@ -262,8 +262,8 @@ function Index() {
                 <p className="mt-4 text-lg font-bold">{d.title}</p>
                 <p className="text-sm opacity-90">{d.sub}</p>
                 <div className="mt-4 flex gap-2">
-                  {d.ext === "PDF" && <button onClick={() => setModal({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] })} className="rounded-full bg-ink px-3 py-1.5 text-sm font-bold text-ink-foreground">Preview</button>}
-                  <a href={d.url} download target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 rounded-full bg-ink/15 px-3 py-1.5 text-sm font-bold"><Icon name="download" width={16} height={16} />Download</a>
+                  {d.ext === "PDF" && <button onClick={() => setModal({ title: d.title, embed: d.url, links: [{ label: "Download", url: d.url, kind: "download" }] })} className="min-h-11 rounded-full bg-ink px-4 text-sm font-bold text-ink-foreground">Preview</button>}
+                  <a href={d.url} download target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 min-h-11 rounded-full bg-ink/15 px-4 text-sm font-bold"><Icon name="download" width={16} height={16} />Download</a>
                 </div>
               </div>
             ))}
@@ -288,7 +288,7 @@ function Index() {
 
       {/* Mobile bottom nav */}
       <nav className="fixed inset-x-0 bottom-0 z-40 flex gap-2 overflow-x-auto bg-ink p-3 md:hidden">
-        {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="shrink-0 rounded-full bg-ink-foreground/15 px-4 py-2 text-sm font-bold text-ink-foreground">{l}</a>)}
+        {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="shrink-0 rounded-full bg-ink-foreground/15 min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground">{l}</a>)}
       </nav>
 
       <Modal item={modal} onClose={() => setModal(null)} />
@@ -309,13 +309,13 @@ function AddLink({ extras, setExtras, open }: { extras: Extra[]; setExtras: (e: 
       }}>
         <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title (e.g. GitHub repo)" className="w-full rounded-xl bg-card px-4 py-3" aria-label="Title" />
         <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://..." className="w-full rounded-xl bg-card px-4 py-3" aria-label="URL" required />
-        <button className="inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-bold text-ink-foreground"><Icon name="plus" width={16} height={16} />Add</button>
+        <button className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground"><Icon name="plus" width={16} height={16} />Add</button>
       </form>
       <ul className="mt-4 space-y-2">
         {extras.map((e) => (
           <li key={e.id} className="flex items-center gap-2 rounded-xl bg-card p-2 pl-3">
-            <button onClick={() => open(e)} className="flex-1 truncate text-left font-medium">{e.title}</button>
-            <button onClick={() => setExtras(extras.filter((x) => x.id !== e.id))} aria-label="Remove" className="rounded-full p-1.5 hover:bg-muted"><Icon name="close" width={16} height={16} /></button>
+            <button onClick={() => open(e)} className="min-h-11 flex-1 truncate text-left font-medium">{e.title}</button>
+            <button onClick={() => setExtras(extras.filter((x) => x.id !== e.id))} aria-label="Remove" className="grid min-h-11 min-w-11 place-items-center rounded-full hover:bg-muted"><Icon name="close" width={16} height={16} /></button>
           </li>
         ))}
       </ul>
