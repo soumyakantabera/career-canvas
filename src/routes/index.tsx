@@ -63,7 +63,7 @@ function Index() {
       <main id="top" className="mx-auto max-w-7xl space-y-20 px-4 py-6 md:px-8 md:py-10">
         {/* Hero bento */}
         <section className="grid gap-4 md:grid-cols-12">
-          <div className="tile bg-ink p-7 text-ink-foreground md:col-span-7 md:row-span-2 md:p-10">
+          <div className="tile bg-ink p-7 text-ink-foreground md:col-span-7 md:row-span-3 md:p-10">
             <span className="inline-flex items-center gap-2 rounded-full bg-green px-3 py-1 text-sm font-bold text-green-ink">
               <span className="h-2 w-2 animate-pulse rounded-full bg-green-ink" /> Available now
             </span>
@@ -77,7 +77,7 @@ function Index() {
             </div>
           </div>
           {tracks.map((t) => (
-            <a key={t.id} href="#tracks" onClick={() => setFilter(t.id)} className={`tile tile-hover flex items-center justify-between p-6 md:col-span-5 ${solid[t.color]}`}>
+            <a key={t.id} href="#tracks" onClick={() => setFilter(t.id)} className={`tile tile-hover flex items-center justify-between p-6 md:col-span-5 md:py-5 ${solid[t.color]}`}>
               <div><p className="text-2xl font-bold">{t.title}</p><p className="text-sm font-medium opacity-90">{t.roles}</p></div>
               <Icon name={t.icon} width={44} height={44} />
             </a>
