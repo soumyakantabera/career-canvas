@@ -1,11 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Icon, type IconName } from "@/components/icons";
 import { BrandLogo } from "@/components/brand-logos";
 import { Roadmap } from "@/components/roadmap";
 import { Recommender } from "@/components/recommender";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
-import { certificates, defaultActions, documents, privateNotes, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
+import { certificates, documents, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
 import { SnapshotDeck } from "@/components/snapshot-deck";
 
 export const Route = createFileRoute("/")({
@@ -22,27 +22,13 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type Extra = { id: string; title: string; url: string };
-function useLocal<T>(key: string, init: T) {
-  const [v, setV] = useState<T>(init);
-  useEffect(() => { try { const s = localStorage.getItem(key); if (s) setV(JSON.parse(s)); } catch {} }, [key]);
-  const set = (n: T) => { setV(n); localStorage.setItem(key, JSON.stringify(n)); };
-  return [v, set] as const;
-}
 
 const nav = [["match", "Match"], ["tracks", "Tracks"], ["projects", "Projects"], ["roadmap", "Roadmap"], ["certs", "Certificates"], ["docs", "Downloads"], ["contact", "Contact"]];
 const dock: [string, string, IconName][] = [["match", "Match", "flow"], ["projects", "Projects", "dashboard"], ["roadmap", "Roadmap", "calendar"], ["docs", "Docs", "cv"], ["contact", "Contact", "mail"]];
 
 function Index() {
-  const [mine, setMine] = useLocal("sb-mymode", false);
   const [filter, setFilter] = useState<TrackId | "all">("all");
   const [modal, setModal] = useState<ModalItem | null>(null);
-  const [done, setDone] = useLocal<string[]>("sb-actions", []);
-  const [pipe, setPipe] = useLocal("sb-pipe", { applied: 0, interview: 0, offer: 0 });
-  const [hours, setHours] = useLocal("sb-hours", 0);
-  const [extras, setExtras] = useLocal<Extra[]>("sb-extras", []);
-  const [late, setLate] = useState(false);
-  useEffect(() => { const h = new Date().getHours(); setLate(h >= 23 || h < 5); }, []);
 
   const shownProjects = projects.filter((p) => filter === "all" || p.track.includes(filter));
 
@@ -63,10 +49,6 @@ function Index() {
               className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-bold text-ink-foreground tile-hover">
               <BrandLogo brand="github" mono /><span className="hidden sm:inline">GitHub</span>
             </a>
-            <button onClick={() => setMine(!mine)} aria-pressed={mine}
-              className={`inline-flex items-center gap-2 rounded-full min-h-11 px-4 py-2 text-sm font-bold ${mine ? "bg-ink text-ink-foreground" : "bg-yellow text-yellow-ink"}`}>
-              <Icon name="eye" width={18} height={18} />{mine ? "My mode" : "Showcase"}
-            </button>
           </div>
         </div>
       </header>
@@ -112,70 +94,6 @@ function Index() {
           ))}
         </section>
 
-        {/* My mode dashboard */}
-        {mine && (
-          <section className="space-y-4">
-            <SectionTitle kicker="Only visible in My mode" title="This week" />
-            {late && (
-              <div className="tile flex items-center gap-4 bg-blue p-5 text-blue-ink">
-                <Icon name="moon" width={32} height={32} /><p className="font-medium">It's late. Close the laptop and sleep - the applications will still be here tomorrow.</p>
-              </div>
-            )}
-            <div className="grid gap-4 md:grid-cols-12">
-              <div className="tile bg-card p-6 md:col-span-7">
-                <h3 className="text-lg font-bold">Next actions <span className="text-muted-foreground">· {done.length}/{defaultActions.length}</span></h3>
-                <ul className="mt-4 space-y-2">
-                  {defaultActions.map((a) => {
-                    const on = done.includes(a);
-                    return (
-                      <li key={a}>
-                        <button onClick={() => setDone(on ? done.filter((x) => x !== a) : [...done, a])}
-                          className={`flex w-full items-center gap-3 rounded-xl p-3 text-left ${on ? "bg-green-soft" : "bg-muted"}`}>
-                          <span className={`grid h-6 w-6 shrink-0 place-items-center rounded-md ${on ? "bg-green text-green-ink" : "bg-card"}`}>{on && <Icon name="check" width={16} height={16} />}</span>
-                          <span className={on ? "line-through opacity-70" : ""}>{a}</span>
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-              <div className="space-y-4 md:col-span-5">
-                <div className="tile bg-card p-6">
-                  <h3 className="text-lg font-bold">Application pipeline</h3>
-                  <div className="mt-4 grid grid-cols-3 gap-2">
-                    {(["applied", "interview", "offer"] as const).map((k, i) => (
-                      <div key={k} className={`rounded-2xl p-2 text-center ${solid[(["blue", "orange", "green"] as const)[i]!]}`}>
-                        <p className="text-3xl font-bold">{pipe[k]}</p>
-                        <p className="text-xs font-bold uppercase">{k}</p>
-                        <div className="mt-2 flex justify-center gap-1">
-                          <button aria-label={`Decrease ${k}`} onClick={() => setPipe({ ...pipe, [k]: Math.max(0, pipe[k] - 1) })} className="h-11 w-11 rounded-full bg-ink/20 text-lg font-bold">-</button>
-                          <button aria-label={`Increase ${k}`} onClick={() => setPipe({ ...pipe, [k]: pipe[k] + 1 })} className="h-11 w-11 rounded-full bg-ink/20 text-lg font-bold">+</button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="tile bg-yellow-soft p-6">
-                  <div className="flex items-center justify-between"><h3 className="text-lg font-bold">Hours this week</h3><span className="font-bold">{hours} / 10 h</span></div>
-                  <div className="mt-3"><Progress value={Math.min(100, hours * 10)} label="Weekly hours" /></div>
-                  <div className="mt-3 flex gap-2">
-                    <button onClick={() => setHours(hours + 1)} className="rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground">+1 h</button>
-                    <button onClick={() => setHours(0)} className="rounded-full bg-card min-h-11 px-4 py-2 text-sm font-bold">Reset week</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="grid gap-4 md:grid-cols-12">
-              <div className="tile grid gap-3 bg-card p-6 sm:grid-cols-2 md:col-span-7">
-                {privateNotes.map((n) => (
-                  <div key={n.label} className="rounded-xl bg-muted p-3"><p className="text-xs font-bold uppercase text-muted-foreground">{n.label}</p><p className="mt-1 text-sm">{n.value}</p></div>
-                ))}
-              </div>
-              <AddLink extras={extras} setExtras={setExtras} open={(e) => setModal({ title: e.title, embed: e.url, links: [{ label: "Open link", url: e.url, kind: "link" }] })} />
-            </div>
-          </section>
-        )}
-
         <Recommender open={setModal} />
 
         {/* Tracks */}
@@ -198,8 +116,6 @@ function Index() {
                       </li>
                     ))}
                   </ul>
-                  {mine && (<><p className="mt-4 text-xs font-bold uppercase text-muted-foreground">Gaps (private)</p>
-                  <p className="text-sm text-muted-foreground">{t.gaps.join(" · ")}</p></>)}
                   <div className="mt-auto flex gap-2 pt-5">
                     {t.cv.map((c) => <button key={c.label} onClick={() => setModal({ title: `${t.title} - ${c.label}`, embed: c.url, links: [{ label: "Download PDF", url: c.url, kind: "download" }] })} className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground tile-hover"><Icon name="cv" width={18} height={18} />{c.label}</button>)}
                   </div>
@@ -234,7 +150,7 @@ function Index() {
           </div>
         </section>
 
-        <Roadmap mine={mine} open={setModal} />
+        <Roadmap open={setModal} />
 
         {/* Certificates */}
         <section id="certs">
@@ -297,33 +213,6 @@ function Index() {
       </nav>
 
       <Modal item={modal} onClose={() => setModal(null)} />
-    </div>
-  );
-}
-
-function AddLink({ extras, setExtras, open }: { extras: Extra[]; setExtras: (e: Extra[]) => void; open: (e: Extra) => void }) {
-  const [title, setTitle] = useState("");
-  const [url, setUrl] = useState("");
-  return (
-    <div className="tile bg-orange-soft p-6 md:col-span-5">
-      <h3 className="text-lg font-bold">Add link or embed</h3>
-      <form className="mt-3 space-y-2" onSubmit={(e) => {
-        e.preventDefault();
-        if (!/^https?:\/\//.test(url)) return;
-        setExtras([...extras, { id: String(Date.now()), title: title || url, url }]); setTitle(""); setUrl("");
-      }}>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title (e.g. GitHub repo)" className="w-full rounded-xl bg-card px-4 py-3" aria-label="Title" />
-        <input value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://..." className="w-full rounded-xl bg-card px-4 py-3" aria-label="URL" required />
-        <button className="inline-flex items-center gap-2 rounded-full bg-ink min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground"><Icon name="plus" width={16} height={16} />Add</button>
-      </form>
-      <ul className="mt-4 space-y-2">
-        {extras.map((e) => (
-          <li key={e.id} className="flex items-center gap-2 rounded-xl bg-card p-2 pl-3">
-            <button onClick={() => open(e)} className="min-h-11 flex-1 truncate text-left font-medium">{e.title}</button>
-            <button onClick={() => setExtras(extras.filter((x) => x.id !== e.id))} aria-label="Remove" className="grid min-h-11 min-w-11 place-items-center rounded-full hover:bg-muted"><Icon name="close" width={16} height={16} /></button>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
