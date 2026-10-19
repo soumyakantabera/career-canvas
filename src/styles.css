@@ -78,19 +78,19 @@
   --blue: oklch(0.49 0.22 264);        /* ~#1D4ED8 */
   --blue-ink: oklch(0.99 0 0);          /* white on blue 6.7:1 */
   --blue-soft: oklch(0.94 0.04 255);
-  --orange: oklch(0.7 0.19 47);         /* ~#F97316 */
+  --orange: oklch(0.7 0.21 45);         /* ~#F97316 */
   --orange-ink: oklch(0.18 0.01 265);   /* near-black 7:1 */
   --orange-soft: oklch(0.95 0.04 60);
-  --green: oklch(0.7 0.17 149);        /* ~#16A34A */
+  --green: oklch(0.72 0.2 148);        /* ~#16A34A */
   --green-ink: oklch(0.2 0.05 150);     /* dark green 5.4:1 */
   --green-soft: oklch(0.95 0.05 150);
-  --yellow: oklch(0.86 0.17 92);        /* ~#FACC15 */
+  --yellow: oklch(0.87 0.19 95);        /* ~#FACC15 */
   --yellow-ink: oklch(0.2 0.01 265);
   --yellow-soft: oklch(0.97 0.06 95);
 
   --planned-foreground: oklch(0.4 0.02 265);
-  --shadow-tile: 0 1px 2px oklch(0.2 0.02 265 / 6%), 0 8px 24px -12px oklch(0.2 0.02 265 / 18%);
-  --shadow-lift: 0 2px 4px oklch(0.2 0.02 265 / 8%), 0 20px 40px -16px oklch(0.2 0.02 265 / 28%);
+  --shadow-tile: 0 1px 2px oklch(0.2 0.02 265 / 10%), 0 12px 28px -12px oklch(0.2 0.02 265 / 30%);
+  --shadow-lift: 0 0 0 4px var(--yellow), 0 2px 4px oklch(0.2 0.02 265 / 12%), 0 24px 44px -14px oklch(0.2 0.02 265 / 40%);
 }
 
 @layer base {
@@ -102,6 +102,9 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+  ::selection { background: var(--yellow); color: var(--yellow-ink); }
+  h1, h2 { letter-spacing: -0.02em; }
+  h2 { text-wrap: balance; }
   :focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; border-radius: 8px; }
 }
 
@@ -111,18 +114,19 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 @utility tile-hover {
-  &:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  &:hover, &:focus-visible { transform: translateY(-4px) scale(1.015); box-shadow: var(--shadow-lift); }
+  &:active { transform: translateY(-1px) scale(0.99); }
 }
 
 /* Status fades: background tint lightens, text stays readable (no blur) */
 @utility status-progress {
-  filter: saturate(0.75);
+  filter: saturate(0.85);
   &:hover { filter: none; }
 }
 /* Planned: desaturated tint + softer (still AA) text. Never uses opacity, so text keeps >=4.5:1. */
 @utility status-planned {
   color: var(--planned-foreground);
-  filter: saturate(0.5);
+  filter: saturate(0.65);
   &:hover { filter: none; }
 }
 @utility stripes {
@@ -131,3 +135,9 @@
   animation: stripes-move 1.2s linear infinite;
 }
 @keyframes stripes-move { to { background-position: 24px 0; } }
+
+/* Highlighter: marker stroke behind key words */
+@utility highlight {
+  background-image: linear-gradient(transparent 58%, var(--yellow) 58% 92%, transparent 92%);
+  padding-inline: 0.1em;
+}
