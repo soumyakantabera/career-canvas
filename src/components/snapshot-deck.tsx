@@ -49,7 +49,7 @@ export function SnapshotDeck({ open }: { open: (m: ModalItem) => void }) {
       <div className="mt-4 flex items-center gap-1" role="tablist" aria-label="Snapshots">
         {slides.map((s, k) => (
           <button key={s.label} role="tab" aria-selected={k === i} aria-label={s.alt} title={s.alt} onClick={() => { setI(k); setSeq((v) => v + 1); }}
-            className={`grid min-h-11 min-w-11 place-items-center rounded-full text-ink ${k === i ? "bg-ink-foreground text-ink" : "opacity-90"}`}>
+            className={`grid min-h-11 min-w-11 place-items-center rounded-full ${k === i ? "bg-ink-foreground text-ink" : "bg-ink-foreground/20 text-ink-foreground"}`}>
             <Icon name={s.icon} width={20} height={20} />
           </button>
         ))}
