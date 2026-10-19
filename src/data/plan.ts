@@ -100,6 +100,25 @@ export const months: Month[] = [
   },
 ];
 
+// Work streams across the 6 months. start/end are indexes into `months` (0 = Oct ... 5 = Mar).
+// projectId links to an entry in profile.projects so the bar can open that project's popup.
+export type PlanProject = {
+  id: string; name: string; deliverable: string; hours: string; color: Color; status: Status;
+  start: number; end: number; tools: Brand[]; projectId?: string;
+};
+
+export const planProjects: PlanProject[] = [
+  { id: "p0", name: "P0 · Publish profile", deliverable: "3 public GitHub repos + link on every CV", hours: "7 h", color: "yellow", status: "progress", start: 0, end: 0, tools: ["github", "linkedin"] },
+  { id: "sap", name: "SAP S/4HANA CO", deliverable: "SAP CO certificate finished", hours: "ongoing", color: "blue", status: "progress", start: 0, end: 3, tools: ["sap"] },
+  { id: "p1", name: "P1 · Navaro Casa", deliverable: "Power BI report = Excel pack to the euro", hours: "19 h", color: "green", status: "progress", start: 1, end: 2, tools: ["python", "pandas", "microsoft"], projectId: "p1" },
+  { id: "p3", name: "P3 · Thesis card", deliverable: "1-page visual card of the thesis findings", hours: "4 h", color: "yellow", status: "planned", start: 2, end: 2, tools: ["ssrn"], projectId: "p3" },
+  { id: "sql", name: "SQL (Kaggle)", deliverable: "Intro + Advanced SQL, about 8 h free", hours: "8 h", color: "orange", status: "planned", start: 2, end: 3, tools: ["kaggle"] },
+  { id: "p2", name: "P2 · Live valuation", deliverable: "Excel model + 8 Power BI pages + credit memo", hours: "30 h", color: "blue", status: "planned", start: 3, end: 4, tools: ["microsoft", "python", "bigquery"], projectId: "p2" },
+  { id: "p4", name: "P4 · Credit pack", deliverable: "Only if credit interviews come", hours: "on demand", color: "orange", status: "planned", start: 5, end: 5, tools: ["linkedin"] },
+  { id: "prep", name: "Interview prep", deliverable: "Rehearsed 2-minute stories per project", hours: "7 h", color: "green", status: "planned", start: 5, end: 5, tools: ["linkedin"] },
+  { id: "apps", name: "Applications", deliverable: "4 tailored applications every week", hours: "~96 total", color: "orange", status: "progress", start: 0, end: 5, tools: ["indeed", "glassdoor", "linkedin"] },
+];
+
 export const totals = {
   projectHours: months.reduce((a, m) => a + m.projectHours, 0),
   applications: months.reduce((a, m) => a + m.applications, 0),
