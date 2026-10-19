@@ -1,17 +1,22 @@
 import { useState } from "react";
 import { BrandLogo, brandName, brandUrl } from "./brand-logos";
-import { profile } from "@/data/profile";
+import { profile, projects } from "@/data/profile";
 import { Icon } from "./icons";
-import { SectionTitle, StatusChip, fill, soft, solid, statusClass } from "./ui-blocks";
-import { months, scenarios, totals, weeklyRhythm } from "@/data/plan";
+import { SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "./ui-blocks";
+import { months, planProjects, scenarios, totals, weeklyRhythm } from "@/data/plan";
 
 const maxH = Math.max(...months.map((m) => m.projectHours));
 
-export function Roadmap({ mine }: { mine: boolean }) {
+export function Roadmap({ mine, open }: { mine: boolean; open: (item: ModalItem) => void }) {
   const [active, setActive] = useState(months[0]!.id);
   const m = months.find((x) => x.id === active)!;
   let cum = 0;
   const cumulative = months.map((x) => (cum += x.projectHours));
+
+  const openProject = (projectId: string) => {
+    const p = projects.find((x) => x.id === projectId);
+    if (p) open({ title: p.title, body: p.detail, embed: p.embed, links: p.links });
+  };
 
   return (
     <section id="roadmap" className="space-y-4">
@@ -21,35 +26,88 @@ export function Roadmap({ mine }: { mine: boolean }) {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <div className="tile bg-ink p-5 text-ink-foreground"><p className="text-3xl font-bold">{totals.projectHours} h</p><p className="text-sm opacity-90">project & learning time</p></div>
         <div className="tile bg-blue p-5 text-blue-ink"><p className="text-3xl font-bold">~{totals.applications}</p><p className="text-sm opacity-90">tailored applications planned</p></div>
-        <div className="tile bg-orange p-5 text-orange-ink"><p className="text-3xl font-bold">4</p><p className="text-sm">portfolio pieces (P0 - P3)</p></div>
+        <div className="tile bg-orange p-5 text-orange-ink"><p className="text-3xl font-bold">{planProjects.length}</p><p className="text-sm">work streams (P0 - P4 + more)</p></div>
         <div className="tile bg-green p-5 text-green-ink"><p className="text-3xl font-bold">6.5 h</p><p className="text-sm">per week, sized to real life</p></div>
       </div>
 
-      {/* Gantt-style viz */}
+      {/* Gantt-style viz: every work stream across the 6 months */}
       <div className="tile overflow-x-auto bg-card p-5 md:p-6" tabIndex={0} aria-label="Project timeline chart">
-        <h3 className="text-lg font-bold">Project timeline</h3>
-        <div className="mt-4 min-w-[560px]">
-          <div className="grid grid-cols-[120px_repeat(6,1fr)] gap-1 text-xs font-bold uppercase text-muted-foreground">
+        <h3 className="text-lg font-bold">Every project on the timeline</h3>
+        <p className="mt-1 text-sm text-muted-foreground">Striped = in progress now · faded = planned · tap a bar with a dot to open the project.</p>
+        <div className="mt-4 min-w-[640px]">
+          <div className="grid grid-cols-[180px_repeat(6,1fr)] gap-1 text-xs font-bold uppercase text-muted-foreground">
             <span />{months.map((x) => <span key={x.id} className="text-center">{x.label}</span>)}
           </div>
-          {[
-            { n: "P0 Publish", s: 0, e: 1, c: "yellow" as const, st: "progress" as const },
-            { n: "P1 Navaro Casa", s: 1, e: 3, c: "green" as const, st: "planned" as const },
-            { n: "P3 Thesis card", s: 2, e: 3, c: "yellow" as const, st: "planned" as const },
-            { n: "SQL (Kaggle)", s: 2, e: 4, c: "orange" as const, st: "planned" as const },
-            { n: "P2 Valuation", s: 3, e: 5, c: "blue" as const, st: "planned" as const },
-            { n: "Interview prep", s: 5, e: 6, c: "green" as const, st: "planned" as const },
-            { n: "SAP CO", s: 0, e: 4, c: "blue" as const, st: "progress" as const },
-            { n: "Applications", s: 0, e: 6, c: "orange" as const, st: "progress" as const },
-          ].map((r) => (
-            <div key={r.n} className="mt-2 grid grid-cols-[120px_repeat(6,1fr)] items-center gap-1">
-              <span className="text-sm font-medium">{r.n}</span>
-              <div className={`h-8 rounded-lg ${solid[r.c]} ${statusClass[r.st]} flex items-center px-2 text-xs font-bold`} style={{ gridColumn: `${r.s + 2} / ${r.e + 2}` }}>
-                {r.st === "progress" ? "now" : "planned"}
-              </div>
+          <div className="relative mt-2">
+            {/* month gridlines */}
+            <div className="pointer-events-none absolute inset-0 grid grid-cols-[180px_repeat(6,1fr)] gap-1" aria-hidden="true">
+              <span />{months.map((x) => <span key={x.id} className="border-l-2 border-dashed border-muted" />)}
             </div>
-          ))}
+            <div className="relative space-y-2">
+              {planProjects.map((r) => {
+                const clickable = !!r.projectId;
+                const bar = (
+                  <>
+                    <span className="flex min-w-0 items-center gap-1.5">
+                      {clickable && <span className="h-2 w-2 shrink-0 rounded-full bg-current" aria-hidden="true" />}
+                      <span className="truncate">{r.st === "progress" ? "now" : "planned"}</span>
+                    </span>
+                    <span className="hidden shrink-0 gap-1 md:flex" aria-hidden="true">
+                      {r.tools.slice(0, 3).map((t) => <span key={t} className="grid h-6 w-6 place-items-center rounded-md bg-card"><BrandLogo brand={t} size={14} /></span>)}
+                    </span>
+                  </>
+                );
+                const barClass = `h-9 rounded-lg px-2 text-xs font-bold flex items-center justify-between gap-2 ${solid[r.color]} ${statusClass[r.status]} ${clickable ? "tile-hover cursor-pointer" : ""}`;
+                const barStyle = { gridColumn: `${r.start + 2} / ${r.end + 3}` };
+                return (
+                  <div key={r.id} className="grid grid-cols-[180px_repeat(6,1fr)] items-center gap-1">
+                    <span className="pr-2">
+                      <span className="block truncate text-sm font-bold">{r.name}</span>
+                      <span className="block truncate text-xs text-muted-foreground">{r.hours} · {r.deliverable}</span>
+                    </span>
+                    {clickable ? (
+                      <button onClick={() => openProject(r.projectId!)} aria-label={`Open project: ${r.name}`} className={barClass} style={barStyle}>{bar}</button>
+                    ) : (
+                      <span className={barClass} style={barStyle}>{bar}</span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* What ships when */}
+      <div className="tile bg-card p-5 md:p-6">
+        <h3 className="text-lg font-bold">What ships, and when</h3>
+        <ol className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {planProjects.filter((p) => p.id !== "apps").map((p) => {
+            const inner = (
+              <>
+                <span className="flex items-center justify-between gap-2">
+                  <span className="font-bold leading-tight">{p.name}</span>
+                  <StatusChip status={p.status} />
+                </span>
+                <span className="mt-2 block text-sm">{p.deliverable}</span>
+                <span className="mt-3 flex items-center justify-between gap-2">
+                  <span className="text-xs font-bold uppercase tracking-wide">{months[p.start]!.label}{p.end !== p.start ? ` - ${months[p.end]!.label}` : ""} · {p.hours}</span>
+                  <span className="flex gap-1">{p.tools.map((t) => <span key={t} className="grid h-7 w-7 place-items-center rounded-md bg-card"><BrandLogo brand={t} size={16} /></span>)}</span>
+                </span>
+              </>
+            );
+            const cls = `tile flex h-full w-full flex-col p-4 text-left ${p.status === "planned" ? soft[p.color] : solid[p.color]} ${statusClass[p.status]}`;
+            return (
+              <li key={p.id}>
+                {p.projectId ? (
+                  <button onClick={() => openProject(p.projectId!)} aria-label={`Open project: ${p.name}`} className={`${cls} tile-hover`}>{inner}</button>
+                ) : (
+                  <div className={cls}>{inner}</div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-12">
