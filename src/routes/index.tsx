@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Icon } from "@/components/icons";
+import { Icon, type IconName } from "@/components/icons";
 import { BrandLogo } from "@/components/brand-logos";
 import { Roadmap } from "@/components/roadmap";
 import { Recommender } from "@/components/recommender";
@@ -46,7 +46,7 @@ function Index() {
   const shownProjects = projects.filter((p) => filter === "all" || p.track.includes(filter));
 
   return (
-    <div className="min-h-screen pb-24 md:pb-0">
+    <div className="min-h-screen pb-24 lg:pb-0">
       {/* Top bar */}
       <header className="sticky top-0 z-40 bg-paper/90 backdrop-blur">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 md:px-8">
@@ -54,7 +54,7 @@ function Index() {
             <span className="grid h-11 w-11 place-items-center rounded-xl bg-blue text-blue-ink">SB</span>
             <span className="hidden sm:inline">Soumyakanta Bera</span>
           </a>
-          <nav className="hidden gap-1 md:flex">
+          <nav className="hidden gap-1 lg:flex">
             {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="inline-flex min-h-11 items-center rounded-full px-3 text-sm font-medium hover:bg-yellow-soft">{l}</a>)}
           </nav>
           <div className="flex items-center gap-2">
@@ -280,9 +280,15 @@ function Index() {
         <p className="pb-6 text-center text-sm text-muted-foreground">© 2026 Soumyakanta Bera · Milan</p>
       </main>
 
-      {/* Mobile bottom nav */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 flex gap-2 overflow-x-auto bg-ink p-3 md:hidden">
-        {nav.map(([id, l]) => <a key={id} href={`#${id}`} className="shrink-0 rounded-full bg-ink-foreground/15 min-h-11 px-4 py-2 text-sm font-bold text-ink-foreground">{l}</a>)}
+      {/* Mobile / tablet bottom dock */}
+      <nav aria-label="Sections" className="fixed inset-x-3 bottom-3 z-40 mx-auto flex max-w-md items-center gap-1 rounded-full bg-ink p-2 shadow-xl lg:hidden">
+        {dock.map(([id, l, icon]) => (
+          <a key={id} href={`#${id}`} aria-label={l}
+            className="flex min-h-11 min-w-11 flex-1 flex-col items-center justify-center gap-1 rounded-full px-1 py-1.5 text-ink-foreground transition-colors hover:bg-ink-foreground/15">
+            <Icon name={icon} width={20} height={20} />
+            <span className="text-[10px] font-bold leading-none">{l}</span>
+          </a>
+        ))}
       </nav>
 
       <Modal item={modal} onClose={() => setModal(null)} />
