@@ -11,5 +11,6 @@
 
 - Portfolio content lives in src/data (profile.ts, plan.ts); src/lib/catalog.ts flattens it for the local role matcher - edit data there, not in components.
 - Role matcher is local TF-IDF in src/lib/matcher.ts (no API) so it works offline and costs nothing.
+- GitHub Pages builds disable Nitro and prerender only explicitly listed content routes with link crawling off; downloads are static assets, not routes to render.
 
 - Showcase-only: the private "My mode" tracker was removed at the user request; personal data updates happen via chat edits to src/data. Do not re-add editable private state or a mode toggle. Snapshot-deck tabs use icons, not text labels.
