@@ -81,13 +81,14 @@
   --orange: oklch(0.7 0.19 47);         /* ~#F97316 */
   --orange-ink: oklch(0.18 0.01 265);   /* near-black 7:1 */
   --orange-soft: oklch(0.95 0.04 60);
-  --green: oklch(0.63 0.17 149);        /* ~#16A34A */
+  --green: oklch(0.7 0.17 149);        /* ~#16A34A */
   --green-ink: oklch(0.2 0.05 150);     /* dark green 5.4:1 */
   --green-soft: oklch(0.95 0.05 150);
   --yellow: oklch(0.86 0.17 92);        /* ~#FACC15 */
   --yellow-ink: oklch(0.2 0.01 265);
   --yellow-soft: oklch(0.97 0.06 95);
 
+  --planned-foreground: oklch(0.4 0.02 265);
   --shadow-tile: 0 1px 2px oklch(0.2 0.02 265 / 6%), 0 8px 24px -12px oklch(0.2 0.02 265 / 18%);
   --shadow-lift: 0 2px 4px oklch(0.2 0.02 265 / 8%), 0 20px 40px -16px oklch(0.2 0.02 265 / 28%);
 }
@@ -115,13 +116,14 @@
 
 /* Status fades: background tint lightens, text stays readable (no blur) */
 @utility status-progress {
-  opacity: 0.78;
-  &:hover { opacity: 1; }
+  filter: saturate(0.75);
+  &:hover { filter: none; }
 }
+/* Planned: desaturated tint + softer (still AA) text. Never uses opacity, so text keeps >=4.5:1. */
 @utility status-planned {
-  opacity: 0.55;
-  filter: saturate(0.7);
-  &:hover { opacity: 0.95; filter: none; }
+  color: var(--planned-foreground);
+  filter: saturate(0.5);
+  &:hover { filter: none; }
 }
 @utility stripes {
   background-image: repeating-linear-gradient(45deg, oklch(1 0 0 / 35%) 0 6px, transparent 6px 12px);
