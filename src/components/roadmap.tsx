@@ -50,7 +50,7 @@ export function Roadmap({ mine, open }: { mine: boolean; open: (item: ModalItem)
                   <>
                     <span className="flex min-w-0 items-center gap-1.5">
                       {clickable && <span className="h-2 w-2 shrink-0 rounded-full bg-current" aria-hidden="true" />}
-                      <span className="truncate">{r.st === "progress" ? "now" : "planned"}</span>
+                      <span className="truncate">{r.status === "progress" ? "now" : "planned"}</span>
                     </span>
                     <span className="hidden shrink-0 gap-1 md:flex" aria-hidden="true">
                       {r.tools.slice(0, 3).map((t) => <span key={t} className="grid h-6 w-6 place-items-center rounded-md bg-card"><BrandLogo brand={t} size={14} /></span>)}

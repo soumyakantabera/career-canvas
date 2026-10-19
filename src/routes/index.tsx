@@ -228,7 +228,7 @@ function Index() {
           </div>
         </section>
 
-        <Roadmap mine={mine} />
+        <Roadmap mine={mine} open={setModal} />
 
         {/* Certificates */}
         <section id="certs">
