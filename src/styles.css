@@ -45,6 +45,8 @@
   --color-yellow-ink: var(--yellow-ink);
   --color-yellow-soft: var(--yellow-soft);
   --color-ink: var(--ink);
+  --color-linkedin: var(--linkedin);
+  --color-linkedin-ink: var(--linkedin-ink);
   --color-ink-foreground: var(--ink-foreground);
   --color-paper: var(--paper);
 }
@@ -88,6 +90,8 @@
   --yellow: oklch(0.55 0.1 72);         /* ocra / ochre */
   --yellow-ink: oklch(0.99 0 0);
   --yellow-soft: oklch(0.96 0.03 85);
+  --linkedin: oklch(0.42 0.12 250);     /* LinkedIn dark blue ~#0A4E8F */
+  --linkedin-ink: oklch(0.99 0 0);
 
   --planned-foreground: oklch(0.4 0.02 265);
   --shadow-tile: 0 1px 2px oklch(0.2 0.02 265 / 10%), 0 12px 28px -12px oklch(0.2 0.02 265 / 30%);
