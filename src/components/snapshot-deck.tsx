@@ -1,7 +1,7 @@
 import { file } from "@/lib/files";
 import { useEffect, useState } from "react";
 import { Icon, type IconName } from "@/components/icons";
-const photo = file("photo.png");
+const photo = file("photo-hd.jpg");
 const cvIt = file("cv-it-preview.png");
 const cvEn = file("cv-preview.png");
 import { documents } from "@/data/profile";
