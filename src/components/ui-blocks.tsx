@@ -1,4 +1,5 @@
 import { useEffect, type ReactNode } from "react";
+import { pdfPages } from "@/lib/pdf-pages";
 import type { Color, Status } from "@/data/profile";
 import { Icon } from "./icons";
 import { BrandLogo } from "./brand-logos";
