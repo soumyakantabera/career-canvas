@@ -90,7 +90,7 @@
 
   --planned-foreground: oklch(0.4 0.02 265);
   --shadow-tile: 0 1px 2px oklch(0.2 0.02 265 / 10%), 0 12px 28px -12px oklch(0.2 0.02 265 / 30%);
-  --shadow-lift: 0 0 0 4px var(--yellow), 0 2px 4px oklch(0.2 0.02 265 / 12%), 0 24px 44px -14px oklch(0.2 0.02 265 / 40%);
+  --shadow-lift: 0 2px 4px oklch(0.2 0.02 265 / 12%), 0 24px 44px -14px oklch(0.2 0.02 265 / 40%);
 }
 
 @layer base {
@@ -114,19 +114,19 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 @utility tile-hover {
-  &:hover, &:focus-visible { transform: translateY(-4px) scale(1.015); box-shadow: var(--shadow-lift); }
+  &:hover, &:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
   &:active { transform: translateY(-1px) scale(0.99); }
 }
 
 /* Status fades: background tint lightens, text stays readable (no blur) */
 @utility status-progress {
-  filter: saturate(0.85);
+  filter: none;
   &:hover { filter: none; }
 }
 /* Planned: desaturated tint + softer (still AA) text. Never uses opacity, so text keeps >=4.5:1. */
 @utility status-planned {
   color: var(--planned-foreground);
-  filter: saturate(0.65);
+  filter: saturate(0.9);
   &:hover { filter: none; }
 }
 @utility stripes {
