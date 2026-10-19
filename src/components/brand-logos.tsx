@@ -48,7 +48,7 @@ export function BrandLogo({ brand, size = 24, mono = false }: { brand: Brand; si
 /** Where each logo leads visitors: my profile, the project evidence, or the official resource. */
 export const brandUrl: Partial<Record<Brand, string>> = {
   linkedin: "https://linkedin.com/in/soumyakantabera",
-  github: "https://github.com/",
+  github: "https://github.com/soumyakantabera",
   ssrn: "https://doi.org/10.2139/ssrn.7082778",
   microsoft: "https://learn.microsoft.com/power-bi/",
   sap: "https://learning.sap.com/",
