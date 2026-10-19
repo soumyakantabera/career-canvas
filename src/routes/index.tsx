@@ -6,6 +6,7 @@ import { Roadmap } from "@/components/roadmap";
 import { Recommender } from "@/components/recommender";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
 import { certificates, defaultActions, documents, privateNotes, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
+import cvPreview from "@/assets/cv-preview.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
