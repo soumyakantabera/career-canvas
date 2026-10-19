@@ -194,7 +194,7 @@ function Index() {
           <div className="grid min-w-0 gap-3">
             <a href={`mailto:${profile.email}`} className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-yellow p-4 font-bold text-yellow-ink tile-hover"><Icon name="mail" />{profile.email}</a>
             <a href={`tel:${profile.phone.replace(/\s/g, "")}`} className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-orange p-4 font-bold text-orange-ink tile-hover"><Icon name="language" />{profile.phone}</a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-green p-4 font-bold text-green-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-linkedin p-4 font-bold text-linkedin-ink tile-hover"><BrandLogo brand="linkedin" mono />linkedin.com/in/soumyakantabera</a>
             {profile.github && <a href={profile.github} target="_blank" rel="noreferrer" className="flex min-w-0 items-center gap-3 break-all rounded-2xl bg-ink p-4 font-bold text-ink-foreground tile-hover"><BrandLogo brand="github" mono />GitHub</a>}
           </div>
         </section>
