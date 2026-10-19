@@ -57,13 +57,13 @@ export function Roadmap({ mine }: { mine: boolean }) {
           <h3 className="text-lg font-bold">Hours per month <span className="font-medium text-muted-foreground">· line = cumulative</span></h3>
           <div className="relative mt-6 flex h-48 items-end gap-3">
             {months.map((x, i) => (
-              <button key={x.id} onClick={() => setActive(x.id)} aria-label={`${x.label}: ${x.projectHours} hours`}
+              <div key={x.id} role="img" aria-label={`${x.label}: ${x.projectHours} hours, ${cumulative[i]} hours total`}
                 className={`relative flex h-full flex-1 flex-col items-center justify-end ${statusClass[x.status]}`}>
                 <span className="mb-1 text-xs font-bold">{x.projectHours}h</span>
                 <span className={`w-full rounded-t-xl ${fill[x.color]} ${active === x.id ? "ring-4 ring-ink" : ""}`} style={{ height: `${(x.projectHours / maxH) * 75}%` }} />
                 <span className="mt-2 text-xs font-bold">{x.label}</span>
                 <span className="absolute left-1/2 h-3 w-3 -translate-x-1/2 rounded-full bg-ink" style={{ bottom: `calc(${(cumulative[i]! / totals.projectHours) * 85}% + 1.5rem)` }} title={`${cumulative[i]} h total`} />
-              </button>
+              </div>
             ))}
           </div>
         </div>
@@ -95,7 +95,7 @@ export function Roadmap({ mine }: { mine: boolean }) {
       </div>
 
       {/* Month detail */}
-      <article role="tabpanel" className={`tile overflow-hidden ${statusClass[m.status]}`}>
+      <div role="tabpanel" className={`tile overflow-hidden ${statusClass[m.status]}`}>
         <div className={`flex flex-wrap items-center justify-between gap-4 p-6 ${solid[m.color]}`}>
           <div>
             <p className="text-sm font-bold uppercase tracking-widest">{m.range}</p>
@@ -114,7 +114,7 @@ export function Roadmap({ mine }: { mine: boolean }) {
             {m.tools.map((t) => <span key={t} className="grid h-11 min-w-11 place-items-center rounded-xl bg-muted px-2"><BrandLogo brand={t} size={22} /></span>)}
           </div>
         </div>
-      </article>
+      </div>
 
       {/* All months at a glance */}
       <ol className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
