@@ -7,6 +7,7 @@ import { Recommender } from "@/components/recommender";
 import { Modal, Progress, SectionTitle, StatusChip, fill, soft, solid, statusClass, type ModalItem } from "@/components/ui-blocks";
 import { certificates, documents, profile, projects, stats, tracks, type TrackId } from "@/data/profile";
 import { SnapshotDeck } from "@/components/snapshot-deck";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,6 +28,7 @@ const nav = [["match", "Match"], ["tracks", "Tracks"], ["projects", "Projects"],
 const dock: [string, string, IconName][] = [["match", "Match", "flow"], ["projects", "Projects", "dashboard"], ["roadmap", "Roadmap", "calendar"], ["docs", "Docs", "cv"], ["contact", "Contact", "mail"]];
 
 function Index() {
+  const revealRef = useScrollReveal();
   const [filter, setFilter] = useState<TrackId | "all">("all");
   const [modal, setModal] = useState<ModalItem | null>(null);
 
@@ -53,7 +55,7 @@ function Index() {
         </div>
       </header>
 
-      <main id="top" className="mx-auto max-w-7xl space-y-14 px-4 py-6 md:space-y-16 md:px-8 md:py-10">
+      <main ref={revealRef} id="top" className="mx-auto max-w-7xl space-y-14 px-4 py-6 md:space-y-16 md:px-8 md:py-10">
         {/* Hero bento */}
         <section className="grid gap-4 md:grid-cols-12">
           <div className="tile bg-ink p-7 text-ink-foreground md:col-span-7 md:row-span-3 md:p-10">
